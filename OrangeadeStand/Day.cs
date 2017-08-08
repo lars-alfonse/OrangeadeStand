@@ -13,13 +13,21 @@ namespace OrangeadeStand
         private int CustomerAmounts;
         Weather todaysWeather;
         
+        public Day()
+        {
+            GenerateScurveyLevel();
+            todaysWeather = new Weather();
+        }
         private void GenerateScurveyLevel()
         {
             ScurveyLevel = random.Next(1, 100);
         }
-        private void retrieveWeather()
+        private void GetCustomers()
         {
-
-        } 
+            double weatherLoss;
+            double customers = random.Next(100, 130);
+            weatherLoss = todaysWeather.percipitationModifier + 50 * (todaysWeather.cloudCoverage / 100);
+            CustomerAmounts =  (int)Math.Floor(customers - weatherLoss);
+        }
     }
 }

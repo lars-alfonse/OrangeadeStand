@@ -8,12 +8,14 @@ namespace OrangeadeStand
 {
     class Weather
     {
-        private int cloudCoverage;
+        public int cloudCoverage;
         private string weatherType;
-        private int temperature;
+        public int temperature;
         private bool isPercipitating;
         private int percipitationChance;
         private string percipitationType;
+        public int percipitationModifier;
+        
         Random random = new Random();
         List<string> perciptitationOptions = new List<string> { "drizzle", "rain", "monsoon" };
 
@@ -82,5 +84,26 @@ namespace OrangeadeStand
         {
             temperature = random.Next(50, 110);
         }
+        private void GetPerciptiationModifiers()
+        {
+            switch(percipitationType)
+            {
+                case "none":
+                percipitationModifier = 0;
+                    break;
+                case "rain":
+                    percipitationModifier = 10;
+                    break;
+                case "drizzle":
+                    percipitationModifier = 5;
+                    break;
+                case "monsoon":
+                    percipitationModifier = 20;
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 }
