@@ -10,8 +10,8 @@ namespace OrangeadeStand
     {
         static void Main(string[] args)
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.RunMenu();
+            Game game = new Game();
+            game.RunGame();
         }
     }
 }

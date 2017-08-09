@@ -15,7 +15,7 @@ namespace OrangeadeStand
         protected override void GetUserInput()
         {
             Console.WriteLine("Welcome to OrangeAde Stand");
-            Console.WriteLine($"Would you like to {string.Join("\n", userOptions)}");
+            Console.WriteLine($"Would you like to \n{string.Join("\n", userOptions)}");
             PlayerInput = Console.ReadLine().ToLower();
         }
         private void RunUserInput()
@@ -23,7 +23,6 @@ namespace OrangeadeStand
             switch (PlayerInput)
             {
                 case "start game":
-                    game.StartGame();
                     break;
                 case "load game":
                     break;
@@ -33,6 +32,9 @@ namespace OrangeadeStand
                     return;
                 case "quit":
                     break;
+                case "reset":
+                    GetUserInput();
+                    return;
                 default:
                     Console.WriteLine("input not recognized. Please use an approved input or type help for help");
                     GetUserInput();
@@ -59,13 +61,13 @@ namespace OrangeadeStand
             }
             else if (PlayerInput == "reset")
             {
-                GetUserInput();
+                RunMenu();
                 return;
             }
             else
             {
                 Console.WriteLine("Input not recognized, please choose an approved input or type help for help");
-                GetUserInput();
+                RunMenu();
                 return;
             }
         }private void PrintRules()

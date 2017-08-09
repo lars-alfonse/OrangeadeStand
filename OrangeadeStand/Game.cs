@@ -10,13 +10,16 @@ namespace OrangeadeStand
     {
         Player playerOne = new Player();
         Customer currentCustomer;
+        MainMenu mainMenu = new MainMenu();
+        StartGameMenu startGameMenu = new StartGameMenu();
         private int totalTransactions;
         private int totalProfit;
         private int dayCounter;
 
-        public void StartGame()
+        public void RunGame()
         {
-
+           mainMenu.RunMenu();
+           RunMainMenuSelection();
         }
         private void StartNextDay()
         {
@@ -34,6 +37,30 @@ namespace OrangeadeStand
             totalProfit += today.Profit;
             totalTransactions += today.Sales;
 
+        }
+        private void RunMainMenuSelection()
+        {
+            switch (mainMenu.PlayerInput)
+            {
+                case "start game":
+                    StartNewGame();
+                    break;
+                case "load game":
+                    LoadGame();
+                    break;
+                case "quit":
+                    return;
+                default:
+                    return;
+            }
+        }
+        private void StartNewGame()
+        {
+
+        }
+        private void LoadGame()
+        {
+            Console.WriteLine("Feature not available please look forward to it");
         }
     }
 }

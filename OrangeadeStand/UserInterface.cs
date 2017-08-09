@@ -10,7 +10,6 @@ namespace OrangeadeStand
     {
         private string playerInput;
         protected List<string> userOptions;
-        protected Game game = new Game();
 
         public string PlayerInput
         {
@@ -24,6 +23,7 @@ namespace OrangeadeStand
                 {
                     GetHelp();
                     playerInput = "reset";
+                    return;
                 }
                 playerInput = value;
             }
