@@ -1,1 +1,6 @@
 D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStand\bin\Debug\OrangeadeStand.exe.config
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStand\bin\Debug\OrangeadeStand.exe
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStand\bin\Debug\OrangeadeStand.pdb
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStand\obj\Debug\OrangeadeStand.csprojResolveAssemblyReference.cache
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStand\obj\Debug\OrangeadeStand.exe
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStand\obj\Debug\OrangeadeStand.pdb

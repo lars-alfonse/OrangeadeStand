@@ -84,7 +84,7 @@ namespace OrangeadeStand
             }
             else
             {
-                return -.2;
+                return -.1;
             }
         }
         private void CollectPurchaseChanceModifiers(Orangeade currentOrangeade, Weather currentWeather)

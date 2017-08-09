@@ -13,6 +13,11 @@ namespace OrangeadeStand
         private int totalTransactions;
         private int totalProfit;
         private int dayCounter;
+
+        public void StartGame()
+        {
+
+        }
         private void StartNextDay()
         {
             dayCounter += 1;

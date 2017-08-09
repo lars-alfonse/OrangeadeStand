@@ -50,7 +50,7 @@ namespace OrangeadeStand
         {
             double weatherLoss;
             double customers = random.Next(100, 130);
-            weatherLoss = todaysWeather.percipitationModifier + 50 * (todaysWeather.cloudCoverage / 100);
+            weatherLoss = todaysWeather.percipitationModifier + 30 * (todaysWeather.cloudCoverage / 100);
             CustomerAmounts =  (int)Math.Floor(customers - weatherLoss);
         }
     }
