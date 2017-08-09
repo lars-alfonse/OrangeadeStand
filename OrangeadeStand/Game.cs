@@ -56,7 +56,7 @@ namespace OrangeadeStand
         }
         private void StartNewGame()
         {
-
+            startGameMenu.runMenu();
         }
         private void LoadGame()
         {
