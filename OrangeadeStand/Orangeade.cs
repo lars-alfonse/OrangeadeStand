@@ -12,10 +12,10 @@ namespace OrangeadeStand
         private double oranges;
         private double sugar;
         private double ice;
-        private string pulp;
-        private double tart;
-        private double sweet;
-        private double refresh;
+        public string pulp;
+        public double tart;
+        public double sweet;
+        public double refresh;
 
         private void SetRecipie()
         {
@@ -41,7 +41,7 @@ namespace OrangeadeStand
         }
         private double CalculateIngredientPercentage(double ingredient)
         {
-            return (ingredient / (sugar + ice + oranges)) * 100;
+            return (ingredient / (sugar + ice + oranges)) * 300;
         }
     }
 }

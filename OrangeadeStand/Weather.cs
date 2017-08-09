@@ -8,6 +8,7 @@ namespace OrangeadeStand
 {
     class Weather
     {
+        public bool isNice;
         public int cloudCoverage;
         private string weatherType;
         public int temperature;
@@ -66,18 +67,22 @@ namespace OrangeadeStand
             if (cloudCoverage > 80)
             {
                 weatherType = "Overcast";
+                isNice = false;
             }
             else if (cloudCoverage > 50)
             {
                 weatherType = "Party Cloudy";
+                isNice = false;
             }
             else if (cloudCoverage > 20)
             {
                 weatherType = "Mostly Sunny";
+                isNice = true;
             }
             else
             {
                 weatherType = "Sunny";
+                isNice = true;
             }
         }
         private void getTemperature()
