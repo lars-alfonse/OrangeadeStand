@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class IceCube
+    class IceCube : InventoryItems
     {
     }
 }

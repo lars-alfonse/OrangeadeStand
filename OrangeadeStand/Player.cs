@@ -8,5 +8,13 @@ namespace OrangeadeStand
 {
     class Player
     {
+        public Orangeade currentOrangeade;
+        Inventory inventory;
+
+        public void SellOrangeade(Customer currentCustomer)
+        {
+            bool canSell;
+            canSell = inventory.CheckInventory(currentOrangeade);
+        }
     }
 }

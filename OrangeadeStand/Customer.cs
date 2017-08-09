@@ -90,5 +90,18 @@ namespace OrangeadeStand
             weatherModifier = CreateWeatherModifier(currentWeather);
             purchaseChance = (1 + tartModifier + sweetModifier + thirstModifier + pulpModifier + weatherModifier) * 100;
         }
+        private void CheckIfWillBuy(Orangeade currentOrangeade)
+        {
+            int purchaseCheck;
+            purchaseCheck = random.Next(1, 100);
+            if (purchaseCheck < purchaseChance && maxPrice <= currentOrangeade.cost)
+            {
+                willBuy = true;
+            }
+            else
+            {
+                willBuy = false;
+            }
+        }
     }
 }

@@ -8,10 +8,10 @@ namespace OrangeadeStand
 {
     class Orangeade
     {
-        private double cost;
-        private double oranges;
-        private double sugar;
-        private double ice;
+        public double cost;
+        public double oranges;
+        public double sugar;
+        public double ice;
         public string pulp;
         public double tart;
         public double sweet;

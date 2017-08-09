@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    abstract class UserInterface
+    class InventoryItems
     {
-        private string playerInput;
-
-        public abstract void getUserInput();
     }
 }

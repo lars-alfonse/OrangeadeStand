@@ -10,8 +10,8 @@ namespace OrangeadeStand
     {
         Random random = new Random();
         private int ScurveyLevel;
-        private int CustomerAmounts;
-        Weather todaysWeather;
+        public int CustomerAmounts;
+        public Weather todaysWeather;
         
         public Day()
         {
