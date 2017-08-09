@@ -9,6 +9,8 @@ namespace OrangeadeStand
     class Game
     {
         Player playerOne;
+        Player playerTwo;
+        List<Player> players;
         Customer currentCustomer;
         MainMenu mainMenu = new MainMenu();
         StartGameMenu startGameMenu = new StartGameMenu();
@@ -64,19 +66,18 @@ namespace OrangeadeStand
             switch (startGameMenu.NumberOfPlayers)
             {
                 case 1:
-                    PlayGameWithOnePlayer();
+                    players.Add(playerOne = new Player("one"));
                     break;
                 case 2:
-                    Console.WriteLine("Feature not available please look forward to it");
-                    Console.ReadLine();
+                    players.Add(playerOne = new Player("one"));
+                    players.Add(playerTwo = new Player("two"));
                     break;
                 default:
                     break;
             }
         }
-        private void PlayGameWithOnePlayer()
+        private void PlayGame()
         {
-            playerOne = new Player();
 
         }
         private void LoadGame()
