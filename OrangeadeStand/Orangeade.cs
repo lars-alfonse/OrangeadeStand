@@ -8,30 +8,119 @@ namespace OrangeadeStand
 {
     class Orangeade
     {
-        public double cost;
-        public double oranges;
-        public double sugar;
-        public double ice;
-        public string pulp;
-        public double tart;
-        public double sweet;
-        public double refresh;
+        private int cost;
+        private int oranges;
+        private int sugar;
+        private int ice;
+        private string pulp;
+        private double tart;
+        private double sweet;
+        private double refresh;
+
+        public int Cost
+        {
+            get
+            {
+                return cost;
+            }
+            set
+            {
+                cost = value;
+            }
+        }
+        public int Oranges
+        {
+            get
+            {
+                return oranges;
+            }
+            set
+            {
+                oranges = value;
+            }
+        }
+        public int Sugar
+        {
+            get
+            {
+                return sugar;
+            }
+            set
+            {
+                sugar = value;
+            }
+        }
+        public int Ice
+        {
+            get
+            {
+                return ice;
+            }
+            set
+            {
+                ice = value;
+            }
+        }
+        public string Pulp
+        {
+            get
+            {
+                return pulp;
+            }
+            set
+            {
+                pulp = value;
+            }
+        }
+        public double Tart
+        {
+            get
+            {
+                return tart;
+            }
+            set
+            {
+                tart = value;
+            }
+        }
+        public double Sweet
+        {
+            get
+            {
+                return sweet;
+            }
+            set
+            {
+                sweet = value;
+            }
+        }
+        public double Refresh
+        {
+            get
+            {
+                return refresh;
+            }
+            set
+            {
+                refresh = value;
+            }
+        }
 
         private void SetRecipie()
         {
             Console.WriteLine("How many oranges would you like per pitcher?");
-            oranges = double.Parse(Console.ReadLine());
+            oranges = int.Parse(Console.ReadLine());
             Console.WriteLine("How much sugar would you like per pitcher? (in cups)");
-            sugar = double.Parse(Console.ReadLine());
+            sugar = int.Parse(Console.ReadLine());
             Console.WriteLine("How much pulp will you leave in? (None, Some, or Alot)");
             pulp = Console.ReadLine().ToLower();
             Console.WriteLine("How many icecubes will you put in each cup?");
-            ice = double.Parse(Console.ReadLine());
+            ice = int.Parse(Console.ReadLine());
         }
         private void SetCost()
         {
             Console.WriteLine("How many Reales will you sell your orangeade for?");
-            cost = double.Parse(Console.ReadLine());
+            cost = int.Parse(Console.ReadLine());
         }
         private void GetTraits()
         {

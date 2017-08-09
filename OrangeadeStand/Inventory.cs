@@ -8,14 +8,21 @@ namespace OrangeadeStand
 {
     class Inventory
     {
-        public int money;
+        private int money;
         private bool soldOut;
         private int cupsInPitcher;
-        public List<Orange> oranges;
-        public List<Sugar> sugars;
-        public List<IceCube> iceCubes;
-        public List<Cup> cups;
+        public List<InventoryItems> oranges;
+        public List<InventoryItems> sugars;
+        public List<InventoryItems> iceCubes;
+        public List<InventoryItems> cups;
      
+        public int Money
+        {
+            get
+            {
+                return money;
+            }
+        }
         public bool CheckInventory(Orangeade currentOrangeade)
         {
             if (soldOut)
@@ -32,7 +39,7 @@ namespace OrangeadeStand
                 soldOut = true;
                 return false;
             }
-            else if (iceCubes.Count < currentOrangeade.ice)
+            else if (iceCubes.Count < currentOrangeade.Ice)
             {
                 soldOut = true;
                 return false;
@@ -42,13 +49,31 @@ namespace OrangeadeStand
                 return true;
             }
         }
-    private void CreatePitcher(Orangeade currentOrangeade)
+        private void CreatePitcher(Orangeade currentOrangeade)
         {
-            if(oranges.Count >= currentOrangeade.oranges && sugars.Count >= currentOrangeade.sugar)
+            if(oranges.Count >= currentOrangeade.Oranges && sugars.Count >= currentOrangeade.Sugar)
             {
                 cupsInPitcher = 8;
-                SubtractFromInventory(oranges, currentOrangeade.oranges);
+                SubtractFromInventory(oranges, currentOrangeade.Oranges);
+                SubtractFromInventory(sugars, currentOrangeade.Sugar);
             }
+            else
+            {
+                soldOut = true;
+            }
+        }
+        private void SubtractFromInventory(List<InventoryItems> stock, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                stock.RemoveAt(0);
+            }
+        }
+        public void ExchangeGoods(Orangeade currentOrangeade)
+        {
+            money += currentOrangeade.Cost;
+            SubtractFromInventory(iceCubes, currentOrangeade.Ice);
+            SubtractFromInventory(cups, 1);
         }
     }
 }

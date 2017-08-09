@@ -12,7 +12,31 @@ namespace OrangeadeStand
         private int ScurveyLevel;
         public int CustomerAmounts;
         public Weather todaysWeather;
-        
+        private int sales;
+        private int profit;
+
+        public int Sales
+        {
+            get
+            {
+                return sales;
+            }
+            set
+            {
+                sales = value;
+            }
+        }
+        public int Profit
+        {
+            get
+            {
+                return profit;
+            }
+            set
+            {
+                profit = value;
+            }
+        }
         public Day()
         {
             GenerateScurveyLevel();

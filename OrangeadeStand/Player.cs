@@ -9,12 +9,19 @@ namespace OrangeadeStand
     class Player
     {
         public Orangeade currentOrangeade;
-        Inventory inventory;
+        public Inventory inventory;
 
-        public void SellOrangeade(Customer currentCustomer)
+        public bool SellOrangeade(Customer currentCustomer)
         {
-            bool canSell;
-            canSell = inventory.CheckInventory(currentOrangeade);
+            if (inventory.CheckInventory(currentOrangeade) && currentCustomer.WillBuy)
+            {
+                inventory.ExchangeGoods(currentOrangeade);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

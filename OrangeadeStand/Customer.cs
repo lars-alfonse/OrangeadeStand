@@ -17,6 +17,17 @@ namespace OrangeadeStand
         private double purchaseChance;
         Random random = new Random();
 
+        public bool WillBuy
+        {
+            get
+            {
+                return willBuy;
+            }
+           private set
+            {
+                willBuy = value;
+            }
+        }
         public Customer(Weather currentWeather, Orangeade currentOrangeade)
         {
             DetermineMaxPrice();
@@ -83,10 +94,10 @@ namespace OrangeadeStand
             double thirstModifier;
             double pulpModifier;
             double weatherModifier;
-            tartModifier = CreatePurchaseChanceModifier(currentOrangeade.tart, tartPreference);
-            sweetModifier = CreatePurchaseChanceModifier(currentOrangeade.sweet, sweetPreference);
-            thirstModifier = CreatePurchaseChanceModifier(currentOrangeade.refresh, thirstLevel);
-            pulpModifier = CreatePulpPreferenceModifier(currentOrangeade.pulp, pulpPreference);
+            tartModifier = CreatePurchaseChanceModifier(currentOrangeade.Tart, tartPreference);
+            sweetModifier = CreatePurchaseChanceModifier(currentOrangeade.Sweet, sweetPreference);
+            thirstModifier = CreatePurchaseChanceModifier(currentOrangeade.Refresh, thirstLevel);
+            pulpModifier = CreatePulpPreferenceModifier(currentOrangeade.Pulp, pulpPreference);
             weatherModifier = CreateWeatherModifier(currentWeather);
             purchaseChance = (1 + tartModifier + sweetModifier + thirstModifier + pulpModifier + weatherModifier) * 100;
         }
@@ -94,7 +105,7 @@ namespace OrangeadeStand
         {
             int purchaseCheck;
             purchaseCheck = random.Next(1, 100);
-            if (purchaseCheck < purchaseChance && maxPrice <= currentOrangeade.cost)
+            if (purchaseCheck < purchaseChance && maxPrice <= currentOrangeade.Cost)
             {
                 willBuy = true;
             }
