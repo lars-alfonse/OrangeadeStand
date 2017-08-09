@@ -12,6 +12,7 @@ namespace OrangeadeStand
         private string name;
         private int totalProfit;
         private int totalSales;
+        public TurnMenu turnMenu;
         public Orangeade currentOrangeade;
         public Inventory inventory;
 
@@ -51,6 +52,7 @@ namespace OrangeadeStand
             GetPlayerName();
             currentOrangeade = new Orangeade();
             inventory = new Inventory();
+            turnMenu = new TurnMenu(name);
         }
 
         private void GetPlayerName()

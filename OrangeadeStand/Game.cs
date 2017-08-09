@@ -12,6 +12,7 @@ namespace OrangeadeStand
         Player playerTwo;
         Day today;
         List<Player> players = new List<Player>();
+        List<TurnMenu> playerMenus = new List<TurnMenu>();
         Customer currentCustomer;
         MainMenu mainMenu = new MainMenu();
         StartGameMenu startGameMenu = new StartGameMenu();
@@ -99,6 +100,7 @@ namespace OrangeadeStand
         {
             while (dayCounter <= startGameMenu.NumberOfDays)
             {
+                
             }
         }
         private void LoadGame()
