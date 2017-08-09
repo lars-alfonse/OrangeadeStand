@@ -11,7 +11,7 @@ namespace OrangeadeStand
         Player playerOne;
         Player playerTwo;
         Day today;
-        List<Player> players;
+        List<Player> players = new List<Player>();
         Customer currentCustomer;
         MainMenu mainMenu = new MainMenu();
         StartGameMenu startGameMenu = new StartGameMenu();
@@ -52,7 +52,7 @@ namespace OrangeadeStand
         }
         private void ReportWeather()
         {
-            Console.WriteLine($"Today's Temperature is {today.todaysWeather.temperature} Degrees\nToday's Weather: {today.todaysWeather.WeatherType}\nTodays Percipitation: {today.todaysWeather.temperature}");
+            Console.WriteLine($"Today's Temperature is {today.todaysWeather.temperature} Degrees\nToday's Weather: {today.todaysWeather.WeatherType}\nTodays Percipitation: {today.todaysWeather.PercipitationType}");
         }
         private void RunMainMenuSelection()
         {
@@ -74,17 +74,22 @@ namespace OrangeadeStand
         {
             startGameMenu.runMenu();
             CheckPlayerNumber();
+            PlayGame();
+
         }
         private void CheckPlayerNumber()
         {
             switch (startGameMenu.NumberOfPlayers)
             {
                 case 1:
-                    players.Add(playerOne = new Player("one"));
+                    playerOne = new Player("one");
+                    players.Add(playerOne);
                     break;
                 case 2:
-                    players.Add(playerOne = new Player("one"));
-                    players.Add(playerTwo = new Player("two"));
+                    playerTwo = new Player("two");
+                    playerOne = new Player("one");
+                    players.Add(playerOne);
+                    players.Add(playerTwo);
                     break;
                 default:
                     break;
@@ -92,7 +97,9 @@ namespace OrangeadeStand
         }
         private void PlayGame()
         {
-
+            while (dayCounter <= startGameMenu.NumberOfDays)
+            {
+            }
         }
         private void LoadGame()
         {
