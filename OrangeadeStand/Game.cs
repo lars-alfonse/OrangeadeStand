@@ -10,12 +10,11 @@ namespace OrangeadeStand
     {
         Player playerOne;
         Player playerTwo;
+        Day today;
         List<Player> players;
         Customer currentCustomer;
         MainMenu mainMenu = new MainMenu();
         StartGameMenu startGameMenu = new StartGameMenu();
-        private int totalTransactions;
-        private int totalProfit;
         private int dayCounter;
 
         public void RunGame()
@@ -25,20 +24,35 @@ namespace OrangeadeStand
         }
         private void StartNextDay()
         {
-            dayCounter += 1;
-            Day today = new Day();
-            for (int i = 0; i < today.CustomerAmounts; i++)
+            CreateDay();
+            ReportWeather();
+            foreach (Player player in players)
             {
-                currentCustomer = new Customer(today.todaysWeather, playerOne.currentOrangeade);
-                if (playerOne.SellOrangeade(currentCustomer))
+                today.Sales = 0;
+                today.Profit = 0;
+                for (int i = 0; i < today.CustomerAmounts; i++)
                 {
-                    today.Sales += 1;
-                    today.Profit += playerOne.currentOrangeade.Cost;
+                    currentCustomer = new Customer(today.todaysWeather, playerOne.currentOrangeade);
+                    if (player.SellOrangeade(currentCustomer))
+                    {
+                        today.Sales += 1;
+                        today.Profit += playerOne.currentOrangeade.Cost;
+                    }
                 }
-            }
-            totalProfit += today.Profit;
-            totalTransactions += today.Sales;
+                player.TotalProfit += today.Profit;
+                player.TotalSales += today.Sales;
+                Console.WriteLine($"{player.Name} Sold {today.Sales} cups, and made {today.Profit} shillings");
 
+            }
+        }
+        private void CreateDay()
+        {
+            dayCounter += 1;
+            today = new Day();
+        }
+        private void ReportWeather()
+        {
+            Console.WriteLine($"Today's Temperature is {today.todaysWeather.temperature} Degrees\nToday's Weather: {today.todaysWeather.WeatherType}\nTodays Percipitation: {today.todaysWeather.temperature}");
         }
         private void RunMainMenuSelection()
         {

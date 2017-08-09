@@ -8,22 +8,46 @@ namespace OrangeadeStand
 {
     class Player
     {
-        private string playerNumber;
-        private string playerName;
+        private string number;
+        private string name;
+        private int totalProfit;
+        private int totalSales;
         public Orangeade currentOrangeade;
         public Inventory inventory;
 
-        public string PlayerName
+        public string Name
         {
             get
             {
-                return playerName;
+                return name;
 
+            }
+        }
+        public int TotalProfit
+        {
+            get
+            {
+                return totalProfit;
+            }
+            set
+            {
+                totalProfit = value;
+            }
+        }
+        public int TotalSales
+        {
+            get
+            {
+                return totalSales;
+            }
+            set
+            {
+                totalSales = value;
             }
         }
         public Player(string playerNumber)
         {
-            this.playerNumber = playerNumber;
+            number = playerNumber;
             GetPlayerName();
             currentOrangeade = new Orangeade();
             inventory = new Inventory();
@@ -31,8 +55,8 @@ namespace OrangeadeStand
 
         private void GetPlayerName()
         {
-            Console.WriteLine($"Player {playerNumber} please enter your name");
-            playerName = Console.ReadLine();
+            Console.WriteLine($"Player {number} please enter your name");
+            name = Console.ReadLine();
         }
         public bool SellOrangeade(Customer currentCustomer)
         {

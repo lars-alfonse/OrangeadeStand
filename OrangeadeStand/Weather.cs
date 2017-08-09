@@ -16,9 +16,23 @@ namespace OrangeadeStand
         private int percipitationChance;
         private string percipitationType;
         public int percipitationModifier;
-        
         Random random = new Random();
         List<string> perciptitationOptions = new List<string> { "drizzle", "rain", "monsoon" };
+
+        public string PercipitationType
+        {
+            get
+            {
+                return percipitationType;
+            }
+        }
+        public string WeatherType
+        {
+            get
+            {
+                return weatherType;
+            }
+        }
 
         public Weather()
         {
