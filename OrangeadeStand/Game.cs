@@ -42,16 +42,17 @@ namespace OrangeadeStand
                         today.Profit += playerOne.currentOrangeade.Cost;
                     }
                 }
+                today.AddRecipie(player.currentOrangeade);
+                player.Days.Add(today);
                 player.TotalProfit += today.Profit;
                 player.TotalSales += today.Sales;
                 Console.WriteLine($"{player.Name} Sold {today.Sales} cups, and made {today.Profit} shillings");
-
             }
         }
         private void CreateDay()
         {
             dayCounter += 1;
-            today = new Day(prediction);
+            today = new Day(prediction, dayCounter);
         }
         private void ReportWeather()
         {

@@ -9,12 +9,25 @@ namespace OrangeadeStand
     class Day
     {
         Random random = new Random();
+        private int dayNumber;
         private int ScurveyLevel;
         public int CustomerAmounts;
         public Weather todaysWeather;
+        public Orangeade todaysOrangeade;
         private int sales;
         private int profit;
 
+        public int DayNumber
+        {
+            get
+            {
+                return dayNumber;
+            }
+            set
+            {
+                dayNumber = value;
+            }
+        }
         public int Sales
         {
             get
@@ -37,17 +50,23 @@ namespace OrangeadeStand
                 profit = value;
             }
         }
-        public Day()
+        public Day(int number)
         {
+            dayNumber = number;
             GenerateScurveyLevel();
             todaysWeather = new Weather();
             GetCustomers();
         }
-        public Day(Weather prediction)
+        public Day(Weather prediction, int number)
         {
             GenerateScurveyLevel();
+            dayNumber = number;
             GetCurrentWeather(prediction);
             GetCustomers();
+        }
+        public void AddRecipie(Orangeade currentOrangeAde)
+        {
+            todaysOrangeade = currentOrangeAde;
         }
 
         private void GetCurrentWeather(Weather prediction)
@@ -77,7 +96,11 @@ namespace OrangeadeStand
         }
         private void GenerateScurveyLevel()
         {
-            ScurveyLevel = random.Next(1, 100);
+          ScurveyLevel = random.Next(1, 100);
+        }
+        public void ReportDay()
+        {
+            Console.WriteLine($"Day: {dayNumber}\nWeather: {todaysWeather.WeatherType}, Percipitation: {todaysWeather.PercipitationType}, chance: {todaysWeather.PercipitationChance}\nDaily Sales: {sales} Profit: {profit}\nRecipie: Oranges per pitcher - {todaysOrangeade.Oranges}, Cups of Sugar per pitcher - {todaysOrangeade.Sugar}, Ice cubes per cup -  {todaysOrangeade.Ice}, Pulp: {todaysOrangeade.Pulp}");
         }
         private void GetCustomers()
         {

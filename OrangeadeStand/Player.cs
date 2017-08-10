@@ -13,6 +13,7 @@ namespace OrangeadeStand
         private int totalProfit;
         private int totalSales;
         private Cup cup = new Cup();
+        public List<Day> Days = new List<Day>();
         private Orange orange = new Orange();
         private IceCube iceCube = new IceCube();
         private Sugar sugar = new Sugar();
@@ -126,7 +127,25 @@ namespace OrangeadeStand
         }
         private void CheckDays()
         {
-            Console.WriteLine("Feature not implemented Please look forward to it");
+            string playerInput;
+            int playerInputNumber;
+            Console.WriteLine($"{Days.Count} Day(s) passed which day would you like check (enter day number or type quit)");
+            playerInput = Console.ReadLine();
+            try
+            {
+                playerInputNumber = int.Parse(playerInput) -1;
+            }
+            catch(Exception)
+            {
+                RunTurnMenu();
+                return;
+            }
+            DisplayDay(playerInputNumber);
+        }
+        private void DisplayDay(int inputNumber)
+        {
+            if(inputNumber>=0)
+            Days[inputNumber].ReportDay();
         }
         public void RunTurnMenu()
         {
