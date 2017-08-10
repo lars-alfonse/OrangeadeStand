@@ -112,6 +112,14 @@ namespace OrangeadeStand
                     return;
             }
         }
+        private void CheckWeather()
+        {
+            Console.WriteLine("Feature not implemented Please look forward to it");
+        }
+        private void CheckDays()
+        {
+            Console.WriteLine("Feature not implemented Please look forward to it");
+        }
         public void RunTurnMenu()
         {
             turnMenu.RunMenu();
@@ -209,28 +217,13 @@ namespace OrangeadeStand
         }
         private void CheckRecipie()
         {
-            Console.WriteLine($"Current Recipie: \nOranges: {currentOrangeade.oranges.Count} \nSugar: {currentOrangeade.sugars.Count} \nIce Cubes per cup: {currentOrangeade.iceCubes.Count} \nPulp: {currentOrangeade.Pulp}");
+            Console.WriteLine($"Current Recipie: \nOranges: {currentOrangeade.Oranges} \nSugar: {currentOrangeade.Sugar} \nIce Cubes per cup: {currentOrangeade.Ice} \nPulp: {currentOrangeade.Pulp}");
         }
         private void ChangeRecipie()
         {
-            
+            currentOrangeade.SetRecipie();
         }
-        private void ChangeIngredientAmount(InventoryItems ingredient)
-        {
-            int userInput;
-            Console.WriteLine($"How many {ingredient.Name} would you like?");
-            try
-            {
-                userInput = int.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-                Console.WriteLine($"Input not recognized please type in an integer");
-                ChangeIngredientAmount(ingredient);
-                return;
-            }
-            
-        }
+      
 
     }
 }

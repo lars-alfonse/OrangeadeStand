@@ -43,7 +43,7 @@ namespace OrangeadeStand
                 soldOut = true;
                 return false;
             }
-            else if (iceCubes.Count < currentOrangeade.iceCubes.Count)
+            else if (iceCubes.Count < currentOrangeade.Ice)
             {
                 soldOut = true;
                 return false;
@@ -55,22 +55,15 @@ namespace OrangeadeStand
         }
         private void CreatePitcher(Orangeade currentOrangeade)
         {
-            if(oranges.Count >= currentOrangeade.oranges.Count && sugars.Count >= currentOrangeade.sugars.Count)
+            if(oranges.Count >= currentOrangeade.Oranges && sugars.Count >= currentOrangeade.Sugar)
             {
                 cupsInPitcher = 8;
-                SubtractFromInventory(oranges, currentOrangeade.oranges);
-                SubtractFromInventory(sugars, currentOrangeade.sugars);
+                SubtractFromInventory(oranges, currentOrangeade.Oranges);
+                SubtractFromInventory(sugars, currentOrangeade.Sugar);
             }
             else
             {
                 soldOut = true;
-            }
-        }
-        private void SubtractFromInventory(List<InventoryItems> stock, List<InventoryItems> count)
-        {
-            for (int i = 0; i < count.Count; i++)
-            {
-                stock.RemoveAt(0);
             }
         }
         private void SubtractFromInventory(List<InventoryItems> stock, int count)
@@ -83,7 +76,7 @@ namespace OrangeadeStand
         public void ExchangeGoods(Orangeade currentOrangeade)
         {
             money += currentOrangeade.Cost;
-            SubtractFromInventory(iceCubes, currentOrangeade.iceCubes);
+            SubtractFromInventory(iceCubes, currentOrangeade.Ice);
             SubtractFromInventory(cups, 1);
         }
     }

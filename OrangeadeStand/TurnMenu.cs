@@ -56,7 +56,7 @@ namespace OrangeadeStand
             }
             else if (PlayerInput == "check inventory" || PlayerInput == "2" || PlayerInput == "inventory")
             {
-                PlayerInput = "rules";
+                PlayerInput = "check inventory";
             }
             else if (PlayerInput == "purchase stock" || PlayerInput == "3" || PlayerInput == "purchase" || PlayerInput == "stock")
             {

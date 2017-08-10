@@ -9,10 +9,9 @@ namespace OrangeadeStand
     class Orangeade
     {
         private int cost;
-        public List<InventoryItems> oranges;
-        public List<InventoryItems> sugars;
-        public List<InventoryItems> iceCubes;
-        public List<InventoryItems> cups;
+        private int oranges;
+        private int sugar;
+        private int ice;
         private string pulp;
         private double tart;
         private double sweet;
@@ -27,6 +26,39 @@ namespace OrangeadeStand
             set
             {
                 cost = value;
+            }
+        }
+        public int Oranges
+        {
+            get
+            {
+                return oranges;
+            }
+            set
+            {
+                oranges = value;
+            }
+        }
+        public int Sugar
+        {
+            get
+            {
+                return sugar;
+            }
+            set
+            {
+                sugar = value;
+            }
+        }
+        public int Ice
+        {
+            get
+            {
+                return ice;
+            }
+            set
+            {
+                ice = value;
             }
         }
         public string Pulp
@@ -74,7 +106,14 @@ namespace OrangeadeStand
             }
         }
 
-        private void SetRecipie()
+        public Orangeade()
+        {
+            sugar = 3;
+            oranges = 3;
+            ice = 3;
+            pulp = "some";
+        }
+        public void SetRecipie()
         {
             Console.WriteLine("How many oranges would you like per pitcher?");
             oranges = int.Parse(Console.ReadLine());

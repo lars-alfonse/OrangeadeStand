@@ -100,8 +100,11 @@ namespace OrangeadeStand
         {
             while (dayCounter <= startGameMenu.NumberOfDays)
             {
-                CreateDay();
-                ReportWeather();
+                foreach(Player player in players)
+                {
+                    player.RunTurnMenu();
+                }
+                StartNextDay();
                 Console.ReadLine();
             }
         }
