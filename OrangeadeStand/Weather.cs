@@ -26,6 +26,17 @@ namespace OrangeadeStand
                 return percipitationType;
             }
         }
+        public int PercipitationChance
+        {
+            get
+            {
+                return percipitationChance;
+            }
+            set
+            {
+                percipitationChance = value;
+            }
+        }
         public string WeatherType
         {
             get
@@ -41,6 +52,15 @@ namespace OrangeadeStand
             CheckIfPercipitating();
             GetPercipitationType();
             getTemperature();
+            GetWeatherType();
+        }
+        public Weather(int temperature, int percipitationChance)
+        {
+            getCloudCoverage();
+            this.percipitationChance = percipitationChance + random.Next(-20, 20);
+            CheckIfPercipitating();
+            GetPercipitationType();
+            this.temperature = temperature + random.Next(-10, 10);
             GetWeatherType();
         }
         private void getPercipitationChance()

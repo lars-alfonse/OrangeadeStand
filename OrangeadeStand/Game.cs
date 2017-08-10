@@ -14,6 +14,7 @@ namespace OrangeadeStand
         List<Player> players = new List<Player>();
         List<TurnMenu> playerMenus = new List<TurnMenu>();
         Customer currentCustomer;
+        Weather prediction;
         MainMenu mainMenu = new MainMenu();
         StartGameMenu startGameMenu = new StartGameMenu();
         private int dayCounter;
@@ -50,7 +51,7 @@ namespace OrangeadeStand
         private void CreateDay()
         {
             dayCounter += 1;
-            today = new Day();
+            today = new Day(prediction);
         }
         private void ReportWeather()
         {
@@ -102,8 +103,10 @@ namespace OrangeadeStand
         {
             while (dayCounter <= startGameMenu.NumberOfDays)
             {
+                prediction = new Weather();
                 foreach(Player player in players)
                 {
+                    player.prediction = this.prediction;
                     player.RunTurnMenu();
                 }
                 StartNextDay();

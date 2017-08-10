@@ -24,8 +24,6 @@ namespace OrangeadeStand
             {
                 case "start game":
                     break;
-                case "load game":
-                    break;
                 case "rules":
                     PrintRules();
                     return;

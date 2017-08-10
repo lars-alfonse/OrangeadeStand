@@ -115,7 +115,7 @@ namespace OrangeadeStand
         private void CheckIfWillBuy(Orangeade currentOrangeade)
         {
             int purchaseCheck;
-            purchaseCheck = random.Next(1, 70);
+            purchaseCheck = random.Next(1, 62);
             if (purchaseCheck < purchaseChance)
             {
                willBuy = maxPrice >= currentOrangeade.Cost ?  true : false;

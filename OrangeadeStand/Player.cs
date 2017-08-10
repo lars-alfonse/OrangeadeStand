@@ -20,7 +20,7 @@ namespace OrangeadeStand
         public PurchaseMenus purchaseMenu;
         public Orangeade currentOrangeade;
         public Inventory inventory;
-
+        public Weather prediction = null;
         public string Name
         {
             get
@@ -114,7 +114,15 @@ namespace OrangeadeStand
         }
         private void CheckWeather()
         {
-            Console.WriteLine("Feature not implemented Please look forward to it");
+            if (prediction == null)
+            {
+                prediction = new Weather();
+            }
+            ReportWeather();
+        }
+        private void ReportWeather()
+        {
+            Console.WriteLine($"Todays's Temperature will be {prediction.temperature} Degrees\nToday's Weather will be: {prediction.WeatherType}\nTodays Percipitation will be: {prediction.PercipitationType}");
         }
         private void CheckDays()
         {

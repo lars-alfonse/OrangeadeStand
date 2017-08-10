@@ -43,6 +43,38 @@ namespace OrangeadeStand
             todaysWeather = new Weather();
             GetCustomers();
         }
+        public Day(Weather prediction)
+        {
+            GenerateScurveyLevel();
+            GetCurrentWeather(prediction);
+            GetCustomers();
+        }
+
+        private void GetCurrentWeather(Weather prediction)
+        {
+            int weatherTest;
+            weatherTest = CreateWeatherCheck();
+            CheckWeatherAccuracy(weatherTest, prediction);
+        }
+        private int CreateWeatherCheck()
+        {
+            return random.Next(1, 3);
+        }
+        private void  CheckWeatherAccuracy(int weatherTest, Weather prediction)
+        {
+            switch (weatherTest)
+            {
+                case 1:
+                    todaysWeather = prediction;
+                    break;
+                case 2:
+                    todaysWeather = new Weather(prediction.temperature, prediction.PercipitationChance);
+                    break;
+                default:
+                    todaysWeather = new Weather();
+                    break;
+            }
+        }
         private void GenerateScurveyLevel()
         {
             ScurveyLevel = random.Next(1, 100);
