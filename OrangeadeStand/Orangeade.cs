@@ -9,9 +9,10 @@ namespace OrangeadeStand
     class Orangeade
     {
         private int cost;
-        private int oranges;
-        private int sugar;
-        private int ice;
+        public List<InventoryItems> oranges;
+        public List<InventoryItems> sugars;
+        public List<InventoryItems> iceCubes;
+        public List<InventoryItems> cups;
         private string pulp;
         private double tart;
         private double sweet;
@@ -26,39 +27,6 @@ namespace OrangeadeStand
             set
             {
                 cost = value;
-            }
-        }
-        public int Oranges
-        {
-            get
-            {
-                return oranges;
-            }
-            set
-            {
-                oranges = value;
-            }
-        }
-        public int Sugar
-        {
-            get
-            {
-                return sugar;
-            }
-            set
-            {
-                sugar = value;
-            }
-        }
-        public int Ice
-        {
-            get
-            {
-                return ice;
-            }
-            set
-            {
-                ice = value;
             }
         }
         public string Pulp

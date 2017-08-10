@@ -13,6 +13,7 @@ namespace OrangeadeStand
             name = "orange";
             cost = 10;
             shelfLife = 4;
+            unit = 1;
         }
     }
 

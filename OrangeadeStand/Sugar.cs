@@ -13,6 +13,7 @@ namespace OrangeadeStand
             name = "sugar";
             cost = 10;
             shelfLife = 10;
+            unit = 1;
         }
     }
 }   

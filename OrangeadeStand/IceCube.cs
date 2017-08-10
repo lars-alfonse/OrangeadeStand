@@ -13,6 +13,7 @@ namespace OrangeadeStand
             name = "ice cube";
             cost = 1;
             shelfLife = 1;
+            unit = 20;
         }
     }
 }

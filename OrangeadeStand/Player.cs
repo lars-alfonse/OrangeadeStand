@@ -12,6 +12,10 @@ namespace OrangeadeStand
         private string name;
         private int totalProfit;
         private int totalSales;
+        private Cup cup = new Cup();
+        private Orange orange = new Orange();
+        private IceCube iceCube = new IceCube();
+        private Sugar sugar = new Sugar();
         public TurnMenu turnMenu;
         public PurchaseMenus purchaseMenu;
         public Orangeade currentOrangeade;
@@ -85,7 +89,7 @@ namespace OrangeadeStand
                     RunTurnMenu();
                     break;
                 case "purchase stock":
-                    PurchaseStock();
+                    RunPurchaseMenu();
                     RunTurnMenu();
                     return;
                 case "check recipie":
@@ -113,33 +117,37 @@ namespace OrangeadeStand
             turnMenu.RunMenu();
             ProcessTurnInput();
         }
-        private void PurchaseStock()
+        private void RunPurchaseMenu()
         {
-
+            while(purchaseMenu.PlayerInput != "exit")
+            {
+                purchaseMenu.RunMenu();
+                RunShopOutput();
+            }
         }
         private void CheckInventory()
         {
-            Console.WriteLine($"{name} has {inventory.oranges.Count} Oranges \n{inventory.sugars.count} cups of sugar \n{inventory.iceCubes.count} ice cubes \n{inventory.cups.Count}");
+            Console.WriteLine($"{name} has {inventory.oranges.Count} Oranges \n{inventory.sugars.Count} cups of sugar \n{inventory.iceCubes.Count} ice cubes \n{inventory.cups.Count}");
         }
         private void RunShopOutput()
         {
             switch (purchaseMenu.PlayerInput)
             {
                 case "purchase oranges":
-                    PurchaseOranges();
-                    PurchaseStock();
+                    PurchaseStock(orange, inventory.oranges);
+                    RunPurchaseMenu();
                     break;
                 case "purchase sugar":
-                    PurchaseSugar();
-                    PurchaseStock();
+                    PurchaseStock(sugar, inventory.sugars);
+                    RunPurchaseMenu();
                     break;
                 case "purchase ice":
-                    PurchaseIce();
-                    PurchaseStock();
+                    PurchaseStock(iceCube, inventory.iceCubes);
+                    RunPurchaseMenu();
                     return;
                 case "purchase cups":
-                    PurchaseCups();
-                    PurchaseStock();
+                    PurchaseStock(cup, inventory.cups);
+                    RunPurchaseMenu();
                     break;
                 case "exit":
                     break;
@@ -148,5 +156,81 @@ namespace OrangeadeStand
                     return;
             }
         }
+        private void PurchaseStock(InventoryItems item, List<InventoryItems> itemType)
+        {
+            int purchaseNumber;
+            purchaseNumber = GetTransactionChoice(item);
+            if(CheckFunds(item.Cost, purchaseNumber))
+            {
+                FinalizeTransaction(item, purchaseNumber, itemType);
+            }
+            else
+            {
+                Console.WriteLine("insufficient funds please choose a different amount");
+                PurchaseStock(item, itemType);
+                return;
+            }
+
+        }
+        private int GetTransactionChoice(InventoryItems item)
+        {
+            int userInput;
+            Console.WriteLine($"{item.Name}(s) costs {item.Cost} shillings\nHow many would you like to buy?\nCurrent funds: {inventory.Money} shillings");
+            try
+            {
+               userInput =  int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                userInput = GetTransactionChoice(item);
+                return userInput;
+            }
+            return userInput;
+        }
+        private void FinalizeTransaction(InventoryItems item, int purchaseAmount, List<InventoryItems> itemType)
+        {
+            for (int i = 0; i < purchaseAmount*item.Unit; i++)
+            {
+                itemType.Add(item);
+                inventory.Money -= (item.Cost/item.Unit);
+            }
+        }
+        private bool CheckFunds(int itemCost, int itemAmount)
+        {
+            if(inventory.Money < itemAmount * itemCost)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        private void CheckRecipie()
+        {
+            Console.WriteLine($"Current Recipie: \nOranges: {currentOrangeade.oranges.Count} \nSugar: {currentOrangeade.sugars.Count} \nIce Cubes per cup: {currentOrangeade.iceCubes.Count} \nPulp: {currentOrangeade.Pulp}");
+        }
+        private void ChangeRecipie()
+        {
+            
+        }
+        private void ChangeIngredientAmount(InventoryItems ingredient)
+        {
+            int userInput;
+            Console.WriteLine($"How many {ingredient.Name} would you like?");
+            try
+            {
+                userInput = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                ChangeIngredientAmount(ingredient);
+                return;
+            }
+            
+        }
+
     }
 }

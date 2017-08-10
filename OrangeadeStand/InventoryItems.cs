@@ -11,6 +11,7 @@ namespace OrangeadeStand
         protected string name;
         protected int cost;
         protected int shelfLife;
+        protected int unit;
 
         public string Name
         {
@@ -33,5 +34,12 @@ namespace OrangeadeStand
                 return shelfLife;
             }
         }
+        public int Unit
+        {
+            get
+            {
+                return unit;
+            }
+        }   
     }
 }

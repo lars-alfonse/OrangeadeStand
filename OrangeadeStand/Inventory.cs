@@ -22,6 +22,10 @@ namespace OrangeadeStand
             {
                 return money;
             }
+            set
+            {
+                money = value;
+            }
         }
         public bool CheckInventory(Orangeade currentOrangeade)
         {
@@ -39,7 +43,7 @@ namespace OrangeadeStand
                 soldOut = true;
                 return false;
             }
-            else if (iceCubes.Count < currentOrangeade.Ice)
+            else if (iceCubes.Count < currentOrangeade.iceCubes.Count)
             {
                 soldOut = true;
                 return false;
@@ -51,15 +55,22 @@ namespace OrangeadeStand
         }
         private void CreatePitcher(Orangeade currentOrangeade)
         {
-            if(oranges.Count >= currentOrangeade.Oranges && sugars.Count >= currentOrangeade.Sugar)
+            if(oranges.Count >= currentOrangeade.oranges.Count && sugars.Count >= currentOrangeade.sugars.Count)
             {
                 cupsInPitcher = 8;
-                SubtractFromInventory(oranges, currentOrangeade.Oranges);
-                SubtractFromInventory(sugars, currentOrangeade.Sugar);
+                SubtractFromInventory(oranges, currentOrangeade.oranges);
+                SubtractFromInventory(sugars, currentOrangeade.sugars);
             }
             else
             {
                 soldOut = true;
+            }
+        }
+        private void SubtractFromInventory(List<InventoryItems> stock, List<InventoryItems> count)
+        {
+            for (int i = 0; i < count.Count; i++)
+            {
+                stock.RemoveAt(0);
             }
         }
         private void SubtractFromInventory(List<InventoryItems> stock, int count)
@@ -72,7 +83,7 @@ namespace OrangeadeStand
         public void ExchangeGoods(Orangeade currentOrangeade)
         {
             money += currentOrangeade.Cost;
-            SubtractFromInventory(iceCubes, currentOrangeade.Ice);
+            SubtractFromInventory(iceCubes, currentOrangeade.iceCubes);
             SubtractFromInventory(cups, 1);
         }
     }
