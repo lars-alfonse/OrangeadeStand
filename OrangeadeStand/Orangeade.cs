@@ -118,15 +118,51 @@ namespace OrangeadeStand
         public void SetRecipie()
         {
             Console.WriteLine("How much will you charge per cup?");
-            cost = int.Parse(Console.ReadLine());
+            try
+            {
+                cost = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                SetRecipie();
+                return;
+            }
             Console.WriteLine("How many oranges would you like per pitcher?");
-            oranges = int.Parse(Console.ReadLine());
+            try
+            {
+                oranges = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                SetRecipie();
+                return;
+            }
             Console.WriteLine("How much sugar would you like per pitcher? (in cups)");
-            sugar = int.Parse(Console.ReadLine());
+            try
+            {
+                sugar = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                SetRecipie();
+                return;
+            }
             Console.WriteLine("How much pulp will you leave in? (None, Some, or Alot)");
             pulp = Console.ReadLine().ToLower();
             Console.WriteLine("How many icecubes will you put in each cup?");
+            try
+            {
             ice = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                SetRecipie();
+                return;
+            }
         }
         private void SetCost()
         {
