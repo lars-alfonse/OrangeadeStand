@@ -8,5 +8,12 @@ namespace OrangeadeStand
 {
     class Cup : InventoryItems
     {
+        public Cup()
+        {
+            name = "cup";
+            cost = 10;
+            shelfLife = 1000;
+
+        }
     }
 }

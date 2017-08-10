@@ -100,7 +100,9 @@ namespace OrangeadeStand
         {
             while (dayCounter <= startGameMenu.NumberOfDays)
             {
-                
+                CreateDay();
+                ReportWeather();
+                Console.ReadLine();
             }
         }
         private void LoadGame()

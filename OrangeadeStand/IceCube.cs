@@ -8,5 +8,11 @@ namespace OrangeadeStand
 {
     class IceCube : InventoryItems
     {
+        public IceCube()
+        {
+            name = "ice cube";
+            cost = 1;
+            shelfLife = 1;
+        }
     }
 }

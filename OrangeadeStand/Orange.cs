@@ -8,5 +8,12 @@ namespace OrangeadeStand
 {
     class Orange : InventoryItems
     {
+        public Orange()
+        {
+            name = "orange";
+            cost = 10;
+            shelfLife = 4;
+        }
     }
+
 }

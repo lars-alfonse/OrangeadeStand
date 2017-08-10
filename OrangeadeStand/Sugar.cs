@@ -8,5 +8,11 @@ namespace OrangeadeStand
 {
     class Sugar : InventoryItems
     {
+        public Sugar()
+        {
+            name = "sugar";
+            cost = 10;
+            shelfLife = 10;
+        }
     }
-}
+}   
