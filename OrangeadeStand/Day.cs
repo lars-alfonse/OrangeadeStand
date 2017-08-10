@@ -41,6 +41,7 @@ namespace OrangeadeStand
         {
             GenerateScurveyLevel();
             todaysWeather = new Weather();
+            GetCustomers();
         }
         private void GenerateScurveyLevel()
         {
@@ -50,7 +51,7 @@ namespace OrangeadeStand
         {
             double weatherLoss;
             double customers = random.Next(100, 130);
-            weatherLoss = todaysWeather.percipitationModifier + 30 * (todaysWeather.cloudCoverage / 100);
+            weatherLoss = todaysWeather.percipitationModifier + todaysWeather.cloudCoverage;
             CustomerAmounts =  (int)Math.Floor(customers - weatherLoss);
         }
     }

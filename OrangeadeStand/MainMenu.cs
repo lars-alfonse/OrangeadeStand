@@ -28,10 +28,9 @@ namespace OrangeadeStand
                     break;
                 case "rules":
                     PrintRules();
-                    RunMenu();
                     return;
                 case "quit":
-                    break;
+                    return;
                 case "reset":
                     GetUserInput();
                     return;

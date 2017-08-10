@@ -83,11 +83,11 @@ namespace OrangeadeStand
             switch (turnMenu.PlayerInput)
             {
                 case "start turn":
-                    break;
+                    return;
                 case "check inventory":
                     CheckInventory();
                     RunTurnMenu();
-                    break;
+                    return;
                 case "purchase stock":
                     RunPurchaseMenu();
                     RunTurnMenu();
@@ -95,19 +95,19 @@ namespace OrangeadeStand
                 case "check recipie":
                     CheckRecipie();
                     RunTurnMenu();
-                    break;
+                    return;
                 case "check weather":
                     CheckWeather();
                     RunTurnMenu();
-                    break;
+                    return;
                 case "check days":
                     CheckDays();
                     RunTurnMenu();
-                    break;
+                    return;
                 case "change recipie":
                     ChangeRecipie();
                     RunTurnMenu();
-                    break;
+                    return;
                 default:
                     return;
             }
@@ -122,11 +122,12 @@ namespace OrangeadeStand
         }
         public void RunTurnMenu()
         {
-            turnMenu.RunMenu();
-            ProcessTurnInput();
+                turnMenu.RunMenu();
+                ProcessTurnInput();
         }
         private void RunPurchaseMenu()
         {
+            purchaseMenu.PlayerInput = "not exit";
             while(purchaseMenu.PlayerInput != "exit")
             {
                 purchaseMenu.RunMenu();
@@ -135,7 +136,7 @@ namespace OrangeadeStand
         }
         private void CheckInventory()
         {
-            Console.WriteLine($"{name} has {inventory.oranges.Count} Oranges \n{inventory.sugars.Count} cups of sugar \n{inventory.iceCubes.Count} ice cubes \n{inventory.cups.Count}");
+            Console.WriteLine($"{name} has {inventory.oranges.Count} Oranges \n{inventory.sugars.Count} cups of sugar \n{inventory.iceCubes.Count} ice cubes \nCups: {inventory.cups.Count}");
         }
         private void RunShopOutput()
         {
@@ -144,11 +145,11 @@ namespace OrangeadeStand
                 case "purchase oranges":
                     PurchaseStock(orange, inventory.oranges);
                     RunPurchaseMenu();
-                    break;
+                    return;
                 case "purchase sugar":
                     PurchaseStock(sugar, inventory.sugars);
                     RunPurchaseMenu();
-                    break;
+                    return;
                 case "purchase ice":
                     PurchaseStock(iceCube, inventory.iceCubes);
                     RunPurchaseMenu();
@@ -156,9 +157,9 @@ namespace OrangeadeStand
                 case "purchase cups":
                     PurchaseStock(cup, inventory.cups);
                     RunPurchaseMenu();
-                    break;
+                    return;
                 case "exit":
-                    break;
+                    return;
                 default:
                     Console.WriteLine("input not recognized. Please use an approved input or type help for help");
                     return;

@@ -27,6 +27,27 @@ namespace OrangeadeStand
                 money = value;
             }
         }
+        public bool SoldOut
+        {
+            get
+            {
+                return soldOut;
+            
+            }
+            set
+            {
+                soldOut = value;
+            }
+        }
+        public Inventory()
+        {
+            money = 500;
+            oranges = new List<InventoryItems>();
+            sugars = new List<InventoryItems>();
+            iceCubes = new List<InventoryItems>();
+            cups = new List<InventoryItems>();
+
+        }
         public bool CheckInventory(Orangeade currentOrangeade)
         {
             if (soldOut)
@@ -78,6 +99,7 @@ namespace OrangeadeStand
             money += currentOrangeade.Cost;
             SubtractFromInventory(iceCubes, currentOrangeade.Ice);
             SubtractFromInventory(cups, 1);
+            cupsInPitcher -= 1;
         }
     }
 }

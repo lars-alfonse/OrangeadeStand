@@ -33,6 +33,7 @@ namespace OrangeadeStand
                 today.Profit = 0;
                 for (int i = 0; i < today.CustomerAmounts; i++)
                 {
+                    player.inventory.SoldOut = false;
                     currentCustomer = new Customer(today.todaysWeather, playerOne.currentOrangeade);
                     if (player.SellOrangeade(currentCustomer))
                     {
@@ -68,6 +69,7 @@ namespace OrangeadeStand
                 case "quit":
                     return;
                 default:
+                    mainMenu.RunMenu();
                     return;
             }
         }

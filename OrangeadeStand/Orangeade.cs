@@ -112,9 +112,13 @@ namespace OrangeadeStand
             oranges = 3;
             ice = 3;
             pulp = "some";
+            cost = 10;
+            GetTraits();
         }
         public void SetRecipie()
         {
+            Console.WriteLine("How much will you charge per cup?");
+            cost = int.Parse(Console.ReadLine());
             Console.WriteLine("How many oranges would you like per pitcher?");
             oranges = int.Parse(Console.ReadLine());
             Console.WriteLine("How much sugar would you like per pitcher? (in cups)");

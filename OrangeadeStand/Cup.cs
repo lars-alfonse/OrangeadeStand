@@ -11,8 +11,9 @@ namespace OrangeadeStand
         public Cup()
         {
             name = "cup";
-            cost = 10;
+            cost = 2;
             shelfLife = 1000;
+            unit = 1;
 
         }
     }

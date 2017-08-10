@@ -26,19 +26,19 @@ namespace OrangeadeStand
             switch (PlayerInput)
             {
                 case "start turn":
-                    break;
+                    return;
                 case "check inventory":
-                    break;
+                    return;
                 case "purchase stock":
                     return;
                 case "check recipie":
-                    break;
+                    return;
                 case "check weather":
-                    break;
+                    return;
                 case "check days":
-                    break;
+                    return;
                 case "change recipie":
-                    break;
+                    return;
                 case "reset":
                     GetUserInput();
                     return;

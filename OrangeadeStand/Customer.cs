@@ -30,14 +30,18 @@ namespace OrangeadeStand
         }
         public Customer(Weather currentWeather, Orangeade currentOrangeade)
         {
-            DetermineMaxPrice();
+            
             DetermineThirstLevel(currentWeather);
+            DeterminePulpPreference();
             tartPreference = DetermineModifiers();
             sweetPreference = DetermineModifiers();
+            DetermineMaxPrice(currentWeather.temperature);
+            CollectPurchaseChanceModifiers(currentOrangeade, currentWeather);
+            CheckIfWillBuy(currentOrangeade);
         }
-        private void DetermineMaxPrice()
+        private void DetermineMaxPrice(int temperature)
         {
-            maxPrice = (int)Math.Floor(purchaseChance / 2);
+            maxPrice = temperature/ 2;
         }
         private void DeterminePulpPreference()
         {
@@ -50,8 +54,9 @@ namespace OrangeadeStand
         private void DetermineThirstLevel(Weather currentWeather)
         {
             double thirstModifier;
-            thirstModifier = ((currentWeather.temperature - 50) / 60) * 100 + random.Next(-10, 10);
-            thirstLevel = (int)Math.Floor(thirstModifier);
+            thirstModifier = (currentWeather.temperature - 50);
+            thirstModifier = thirstModifier / 60;
+            thirstLevel = (int)Math.Floor(thirstModifier*100);
         }
         private int DetermineModifiers()
         {
@@ -62,14 +67,14 @@ namespace OrangeadeStand
         private double CreatePurchaseChanceModifier(double orangadeTrait, int customerPreference)
         {
             double purchaseChanceModifier;
-            purchaseChanceModifier = (double)Math.Abs(orangadeTrait - customerPreference) / customerPreference *-1;
+            purchaseChanceModifier = ((100- (double)Math.Abs(orangadeTrait - customerPreference))/100 ) * 10;
             return purchaseChanceModifier;
         }
         private double CreatePulpPreferenceModifier(string pulpLevel, string pulpPreference)
         {
             if (pulpPreference == pulpLevel)
             {
-                return .2;
+                return 10;
             }
             else
             {
@@ -80,11 +85,11 @@ namespace OrangeadeStand
         {
             if (currentWeather.isNice)
             {
-                return .2;
+                return 10;
             }
             else
             {
-                return -.1;
+                return -10;
             }
         }
         private void CollectPurchaseChanceModifiers(Orangeade currentOrangeade, Weather currentWeather)
@@ -94,20 +99,27 @@ namespace OrangeadeStand
             double thirstModifier;
             double pulpModifier;
             double weatherModifier;
+            double priceModifier;
+            priceModifier = DeterminePriceModifier(currentOrangeade.Cost);
             tartModifier = CreatePurchaseChanceModifier(currentOrangeade.Tart, tartPreference);
             sweetModifier = CreatePurchaseChanceModifier(currentOrangeade.Sweet, sweetPreference);
             thirstModifier = CreatePurchaseChanceModifier(currentOrangeade.Refresh, thirstLevel);
             pulpModifier = CreatePulpPreferenceModifier(currentOrangeade.Pulp, pulpPreference);
             weatherModifier = CreateWeatherModifier(currentWeather);
-            purchaseChance = (1 + tartModifier + sweetModifier + thirstModifier + pulpModifier + weatherModifier) * 100;
+            purchaseChance = (tartModifier + sweetModifier + thirstModifier + pulpModifier + weatherModifier + priceModifier);
+        }
+        private int DeterminePriceModifier(int cost)
+        {
+            return (int)(((100 - (double)Math.Abs(cost - maxPrice)) / 100) * 50);
         }
         private void CheckIfWillBuy(Orangeade currentOrangeade)
         {
             int purchaseCheck;
-            purchaseCheck = random.Next(1, 100);
-            if (purchaseCheck < purchaseChance && maxPrice <= currentOrangeade.Cost)
+            purchaseCheck = random.Next(1, 50);
+            if (purchaseCheck < purchaseChance)
             {
-                willBuy = true;
+               willBuy = maxPrice >= currentOrangeade.Cost ?  true : false;
+                
             }
             else
             {
