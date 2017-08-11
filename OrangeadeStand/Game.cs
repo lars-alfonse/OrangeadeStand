@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace OrangeadeStand
 {
     class Game
     {
+        static string connectionString = "SERVER = DESKTOP-2C737RL; DATABASE = OrangeadeStand; Trusted_Connection = true";
+        static SqlConnection sqlconn = new SqlConnection(connectionString);
         Player playerOne;
         Player playerTwo;
         Day today;
@@ -30,16 +33,14 @@ namespace OrangeadeStand
             ReportWeather();
             foreach (Player player in players)
             {
-                today.Sales = 0;
-                today.Profit = 0;
+                ResetDay(player);
                 for (int i = 0; i < today.CustomerAmounts; i++)
                 {
-                    player.inventory.SoldOut = false;
-                    currentCustomer = new Customer(today.todaysWeather, playerOne.currentOrangeade);
+                    currentCustomer = new Customer(today.todaysWeather, player.currentOrangeade);
                     if (player.SellOrangeade(currentCustomer))
                     {
                         today.Sales += 1;
-                        today.Profit += playerOne.currentOrangeade.Cost;
+                        today.Profit += player.currentOrangeade.Cost;
                     }
                 }
                 today.AddRecipie(player.currentOrangeade);
@@ -48,6 +49,12 @@ namespace OrangeadeStand
                 player.TotalSales += today.Sales;
                 Console.WriteLine($"{player.Name} Sold {today.Sales} cups, and made {today.Profit} shillings");
             }
+        }
+        private void ResetDay(Player player)
+        {
+            player.inventory.SoldOut = false;
+            today.Sales = 0;
+            today.Profit = 0;
         }
         private void CreateDay()
         {
@@ -116,7 +123,31 @@ namespace OrangeadeStand
         }
         private void LoadGame()
         {
-            Console.WriteLine("Feature not available please look forward to it");
+            Console.WriteLine("Please Enter Username (cAsE sEnSiTiVe)");
+            string username = Console.ReadLine();
+            Console.WriteLine("Please enter password (cAsE sEnSiTiVe)");
+            string password = Console.ReadLine();
+                using (sqlconn)
+                    try
+                    {
+                        sqlconn.Open();
+                        SqlCommand cmd = new SqlCommand($"SELECT * FROM SaveDATA WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
+                        int result = (int)cmd.ExecuteScalar();
+                        Console.WriteLine(result);
+                        sqlconn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine("Failed Connection. Save Data will not be accessable during this game");
+                        LoadGame();
+                    }
+                    finally
+                    {
+                        Console.WriteLine("Press Enter to Start");
+                        Console.ReadLine();
+                    }
+
+            }
         }
-    }
 }

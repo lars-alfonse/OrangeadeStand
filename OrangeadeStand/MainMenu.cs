@@ -32,6 +32,8 @@ namespace OrangeadeStand
                 case "reset":
                     GetUserInput();
                     return;
+                case "load game":
+                    return;
                 default:
                     Console.WriteLine("input not recognized. Please use an approved input or type help for help");
                     GetUserInput();

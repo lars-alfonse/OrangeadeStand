@@ -42,6 +42,7 @@ namespace OrangeadeStand
         private void DetermineMaxPrice(int temperature)
         {
             maxPrice = temperature/ 2;
+            maxPrice += random.Next(-10, 10);
         }
         private void DeterminePulpPreference()
         {
