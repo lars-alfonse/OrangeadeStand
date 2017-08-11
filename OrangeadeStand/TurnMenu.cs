@@ -12,7 +12,7 @@ namespace OrangeadeStand
         public TurnMenu(string name)
         {
             playerName = name;
-            userOptions = new List<string> { "1. Start Turn", "2. Check Inventory", "3. Purchase Stock", "4. Check Recipie", "5. Change Recipie", "6. Check Weather", "7. Check Days" };
+            userOptions = new List<string> { "1. Start Turn", "2. Check Inventory", "3. Purchase Stock", "4. Check Recipie", "5. Change Recipie", "6. Check Weather", "7. Check Days", "8. Save Game" };
         }
         protected override void GetUserInput()
         {
@@ -38,6 +38,8 @@ namespace OrangeadeStand
                 case "check days":
                     return;
                 case "change recipie":
+                    return;
+                case "save game":
                     return;
                 case "reset":
                     GetUserInput();
@@ -82,6 +84,10 @@ namespace OrangeadeStand
             {
                 RunMenu();
                 return;
+            }
+            else if (PlayerInput == "save game" || PlayerInput == "8" || PlayerInput == "save")
+            {
+                PlayerInput = "save game";
             }
             else
             {

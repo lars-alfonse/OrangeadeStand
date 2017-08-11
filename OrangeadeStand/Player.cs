@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace OrangeadeStand
 {
     class Player
     {
+        static string connectionString = "SERVER = DESKTOP-2C737RL; DATABASE = OrangeadeStand; Trusted_Connection = true";
+        static SqlConnection sqlconn = new SqlConnection(connectionString);
         private string number;
         private string name;
         private int totalProfit;
@@ -107,6 +110,10 @@ namespace OrangeadeStand
                     return;
                 case "change recipie":
                     ChangeRecipie();
+                    RunTurnMenu();
+                    return;
+                case "save game":
+                    SaveGame();
                     RunTurnMenu();
                     return;
                 default:
@@ -251,7 +258,61 @@ namespace OrangeadeStand
         {
             currentOrangeade.SetRecipie();
         }
-      
-
+        private void SaveGame()
+        {
+            string username = GetUserInput("UserName");
+            string password = GetUserInput("password");
+            SavePlayerInventory(username, password);
+            return;
+        
+        }
+        private void SavePlayerInventory(string username, string password)
+        {
+            using (sqlconn)
+                try
+                {
+                    SaveUserItem(inventory.iceCubes.Count(), "Ice", username, password);
+                    SaveUserItem(inventory.oranges.Count(), "Oranges", username, password);
+                    SaveUserItem(inventory.cups.Count(), "Cups", username, password);
+                    SaveUserItem(inventory.sugars.Count(), "Sugar", username, password);
+                    SaveUserItem(name, "Name", username, password);
+                    SaveUserItem(inventory.Money, "Money", username, password);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Save Failed");
+                    sqlconn.Close();
+                    Console.ReadLine();
+                    SaveGame();
+                    return;
+                }
+                finally
+                {
+                    Console.WriteLine("Press Enter to Continue");
+                    sqlconn.Close();
+                    Console.ReadLine();
+                }
+        }
+        private string GetUserInput(string parameter)
+        {
+            Console.WriteLine($"Please Enter {parameter} (cAsE sEnSiTiVe)");
+            string returnParameter = Console.ReadLine();
+            return returnParameter;
+        }
+        private void SaveUserItem(int itemCount, string columnName, string username, string password)
+        {
+            sqlconn.Open();
+            SqlCommand cmd = new SqlCommand($"UPDATE SaveDATA SET Player{columnName} = {itemCount} WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
+            cmd.ExecuteNonQuery();
+            sqlconn.Close();
+        }
+        private void SaveUserItem(string name, string columnName, string username, string password)
+        {
+            sqlconn.Open();
+            SqlCommand cmd = new SqlCommand($"UPDATE SaveDATA SET Player{columnName} = '{name}' WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
+            cmd.ExecuteNonQuery();
+            sqlconn.Close();
+        }
     }
 }

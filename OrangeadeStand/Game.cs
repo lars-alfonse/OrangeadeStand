@@ -31,23 +31,16 @@ namespace OrangeadeStand
         {
             CreateDay();
             ReportWeather();
-            foreach (Player player in players)
+        }
+        private void StartCustomers(Player player)
+        {
+            for (int i = 0; i < today.CustomerAmounts; i++)
             {
-                ResetDay(player);
-                for (int i = 0; i < today.CustomerAmounts; i++)
+                currentCustomer = new Customer(today.todaysWeather, player.currentOrangeade);
+                if (player.SellOrangeade(currentCustomer))
                 {
-                    currentCustomer = new Customer(today.todaysWeather, player.currentOrangeade);
-                    if (player.SellOrangeade(currentCustomer))
-                    {
-                        today.Sales += 1;
-                        today.Profit += player.currentOrangeade.Cost;
-                    }
+                    AddSales(player);
                 }
-                today.AddRecipie(player.currentOrangeade);
-                player.Days.Add(today);
-                player.TotalProfit += today.Profit;
-                player.TotalSales += today.Sales;
-                Console.WriteLine($"{player.Name} Sold {today.Sales} cups, and made {today.Profit} shillings");
             }
         }
         private void ResetDay(Player player)
@@ -56,12 +49,25 @@ namespace OrangeadeStand
             today.Sales = 0;
             today.Profit = 0;
         }
+        private void AddSales(Player player)
+        {
+            today.Sales += 1;
+            today.Profit += player.currentOrangeade.Cost;
+        }
+        private void LogDayResults(Player player)
+        {
+            today.AddRecipie(player.currentOrangeade);
+            player.Days.Add(today);
+            player.TotalProfit += today.Profit;
+            player.TotalSales += today.Sales;
+            Console.WriteLine($"{player.Name} Sold {today.Sales} cups, and made {today.Profit} shillings");
+        }
         private void CreateDay()
         {
             dayCounter += 1;
             today = new Day(prediction, dayCounter);
         }
-        private void ReportWeather()
+        private void ReportWeather() 
         {
             Console.WriteLine($"Today's Temperature is {today.todaysWeather.temperature} Degrees\nToday's Weather: {today.todaysWeather.WeatherType}\nTodays Percipitation: {today.todaysWeather.PercipitationType}");
         }
@@ -118,6 +124,12 @@ namespace OrangeadeStand
                     player.RunTurnMenu();
                 }
                 StartNextDay();
+                foreach (Player player in players)
+                {
+                    ResetDay(player);
+                    StartCustomers(player);
+                    LogDayResults(player);
+                }
                 Console.ReadLine();
             }
         }
@@ -132,19 +144,28 @@ namespace OrangeadeStand
                     {
                         sqlconn.Open();
                         SqlCommand cmd = new SqlCommand($"SELECT * FROM SaveDATA WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
-                        int result = (int)cmd.ExecuteScalar();
-                        Console.WriteLine(result);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string name = reader.GetInt32(0).ToString();
+                        string pass = reader.GetString(1);
+
+                        Console.WriteLine(pass + name);
+                    }
                         sqlconn.Close();
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                         Console.WriteLine("Failed Connection. Save Data will not be accessable during this game");
+                        sqlconn.Close();
+                        Console.ReadLine();
                         LoadGame();
                     }
                     finally
                     {
                         Console.WriteLine("Press Enter to Start");
+                        sqlconn.Close();
                         Console.ReadLine();
                     }
 
