@@ -148,9 +148,9 @@ namespace OrangeadeStand
             playerInput = Console.ReadLine();
             try
             {
-                playerInputNumber = int.Parse(playerInput) - 1;
+                playerInputNumber = int.Parse(playerInput) -1;
             }
-            catch (Exception)
+            catch(Exception)
             {
                 RunTurnMenu();
                 return;
@@ -159,18 +159,18 @@ namespace OrangeadeStand
         }
         private void DisplayDay(int inputNumber)
         {
-            if (inputNumber >= 0)
-                Days[inputNumber].ReportDay();
+            if(inputNumber>=0)
+            Days[inputNumber].ReportDay();
         }
         public void RunTurnMenu()
         {
-            turnMenu.RunMenu();
-            ProcessTurnInput();
+                turnMenu.RunMenu();
+                ProcessTurnInput();
         }
         private void RunPurchaseMenu()
         {
             purchaseMenu.PlayerInput = "not exit";
-            while (purchaseMenu.PlayerInput != "exit")
+            while(purchaseMenu.PlayerInput != "exit")
             {
                 purchaseMenu.RunMenu();
                 RunShopOutput();
@@ -211,7 +211,7 @@ namespace OrangeadeStand
         {
             int purchaseNumber;
             purchaseNumber = GetTransactionChoice(item);
-            if (CheckFunds(item.Cost, purchaseNumber))
+            if(CheckFunds(item.Cost, purchaseNumber))
             {
                 FinalizeTransaction(item, purchaseNumber, itemType);
             }
@@ -229,7 +229,7 @@ namespace OrangeadeStand
             Console.WriteLine($"{item.Name}(s) costs {item.Cost} shillings\nHow many would you like to buy?\nCurrent funds: {inventory.Money} shillings");
             try
             {
-                userInput = int.Parse(Console.ReadLine());
+               userInput =  int.Parse(Console.ReadLine());
             }
             catch (Exception)
             {
@@ -241,15 +241,15 @@ namespace OrangeadeStand
         }
         private void FinalizeTransaction(InventoryItems item, int purchaseAmount, List<InventoryItems> itemType)
         {
-            for (int i = 0; i < purchaseAmount * item.Unit; i++)
+            for (int i = 0; i < purchaseAmount*item.Unit; i++)
             {
                 itemType.Add(item);
-                inventory.Money -= (item.Cost / item.Unit);
+                inventory.Money -= (item.Cost/item.Unit);
             }
         }
         private bool CheckFunds(int itemCost, int itemAmount)
         {
-            if (inventory.Money < itemAmount * itemCost)
+            if(inventory.Money < itemAmount * itemCost)
             {
                 return false;
             }
@@ -279,7 +279,7 @@ namespace OrangeadeStand
             {
                 CreateNewUser();
             }
-
+        
         }
         private bool CheckForOverwrite()
         {

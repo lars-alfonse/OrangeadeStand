@@ -125,17 +125,14 @@ namespace OrangeadeStand
         }
         public void SetRecipie()
         {
-            Console.WriteLine("How much will you charge per cup?");
-            try
-            {
-                cost = int.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-                Console.WriteLine($"Input not recognized please type in an integer");
-                SetRecipie();
-                return;
-            }
+            SetCost();
+            SetOranges();
+            SetSugar();
+            SetPulp();
+            SetIce();
+        }
+        private void SetOranges()
+        {
             Console.WriteLine("How many oranges would you like per pitcher?");
             try
             {
@@ -147,6 +144,9 @@ namespace OrangeadeStand
                 SetRecipie();
                 return;
             }
+        }
+        private void SetSugar()
+        {
             Console.WriteLine("How much sugar would you like per pitcher? (in cups)");
             try
             {
@@ -158,12 +158,18 @@ namespace OrangeadeStand
                 SetRecipie();
                 return;
             }
+        }
+        private void SetPulp()
+        {
             Console.WriteLine("How much pulp will you leave in? (None, Some, or Alot)");
             pulp = Console.ReadLine().ToLower();
+        }
+        private void SetIce()
+        {
             Console.WriteLine("How many icecubes will you put in each cup?");
             try
             {
-            ice = int.Parse(Console.ReadLine());
+                ice = int.Parse(Console.ReadLine());
             }
             catch (Exception)
             {
@@ -174,8 +180,18 @@ namespace OrangeadeStand
         }
         private void SetCost()
         {
-            Console.WriteLine("How many Reales will you sell your orangeade for?");
-            cost = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("How much will you charge per cup?");
+            try
+            {
+                cost = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Input not recognized please type in an integer");
+                SetRecipie();
+                return;
+            }
         }
         private void GetTraits()
         {

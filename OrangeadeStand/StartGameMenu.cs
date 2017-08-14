@@ -79,52 +79,46 @@ namespace OrangeadeStand
         {
             int possibleDays;
             Console.WriteLine("How many days would you like to play (minimum 7)");
-            possibleDays = int.Parse(Console.ReadLine());
-            CheckDays(possibleDays);
-        }
-        private void CheckDays(int possibleDays)
-        {
-            if (VerifyInput(possibleDays, 6, false))
+            try
             {
-                numberOfDays = possibleDays;
+                possibleDays = int.Parse(Console.ReadLine());
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Number of days not accepted, please enter minimum of 7 days");
-                runMenu();
+                Console.WriteLine($"Input not recognized please type in an integer");
+                ChangeDays();
                 return;
             }
+            CheckDayLimit(possibleDays);
         }
-        private bool VerifyInput(int testNumber, int check, bool result)
+        private void CheckDayLimit(int possibleDays)
         {
-            if (testNumber <= check && testNumber != 0)
+            if(possibleDays < 7)
             {
-                return result;
+                Console.WriteLine("Number of days not accepted please enter day amount greater than 7");
+                ChangePlayers();
+                return;
             }
             else
             {
-                return !result;
+                numberOfDays = possibleDays;
             }
         }
         private void ChangePlayers()
         {
             int possiblePlayers;
-            Console.WriteLine("How many Players would you like? (1 or 2)");
-            possiblePlayers = int.Parse(Console.ReadLine());
-            CheckPlayers(possiblePlayers);
-        }
-        private void CheckPlayers(int possiblePlayers)
-        {
-            if (VerifyInput(possiblePlayers, 2, true))
+            Console.WriteLine("How many Players would you like?");
+            try
             {
-                numberOfPlayers = possiblePlayers;
+                possiblePlayers = int.Parse(Console.ReadLine());
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Number of Players not accepted, please enter 1 or 2 players");
-                runMenu();
+                Console.WriteLine($"Input not recognized please type in an integer");
+                ChangePlayers();
                 return;
             }
+
         }
         public void runMenu()
         {
