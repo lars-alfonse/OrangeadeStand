@@ -115,6 +115,14 @@ namespace OrangeadeStand
             cost = 10;
             GetTraits();
         }
+        public Orangeade(int cost, int oranges, int sugar, int ice, string pulp)
+        {
+            this.sugar = sugar;
+            this.cost = cost;
+            this.ice = ice;
+            this.oranges = oranges;
+            this.pulp = pulp;
+        }
         public void SetRecipie()
         {
             Console.WriteLine("How much will you charge per cup?");

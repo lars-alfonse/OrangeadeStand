@@ -10,7 +10,7 @@ namespace OrangeadeStand
     {
         public MainMenu()
         {
-            userOptions = new List<string> { "1. Start Game", "2. Load Game", "3. Rules", "4. Quit" };
+            userOptions = new List<string> { "1. Start Game", "2. Load Player", "3. Rules", "4. Quit" };
         }
         protected override void GetUserInput()
         {
@@ -32,7 +32,7 @@ namespace OrangeadeStand
                 case "reset":
                     GetUserInput();
                     return;
-                case "load game":
+                case "load player":
                     return;
                 default:
                     Console.WriteLine("input not recognized. Please use an approved input or type help for help");
@@ -50,9 +50,9 @@ namespace OrangeadeStand
             {
                 PlayerInput = "rules";
             }
-            else if (PlayerInput == "load game" || PlayerInput == "2" || PlayerInput == "load")
+            else if (PlayerInput == "load player" || PlayerInput == "2" || PlayerInput == "load")
             {
-                PlayerInput = "load game";
+                PlayerInput = "load player";
             }
             else if (PlayerInput == "quit" || PlayerInput == "4")
             {

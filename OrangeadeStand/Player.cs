@@ -64,7 +64,15 @@ namespace OrangeadeStand
             turnMenu = new TurnMenu(name);
             purchaseMenu = new PurchaseMenus();
         }
-
+        public Player(string playerNumber, string playerName, int playerMoney, int playerOranges, int playerSugar, int playerIce, int playerCups, int recipieCost, int recipieOranges, int recipieSugar, int recipieIce, string recipiePulp)
+        {
+            number = playerNumber;
+            name = playerName;
+            currentOrangeade = new Orangeade(recipieCost, recipieOranges, recipieSugar, recipieIce, recipiePulp);
+            inventory = new Inventory(playerMoney, playerOranges, playerSugar, playerIce, playerCups);
+            turnMenu = new TurnMenu(name);
+            purchaseMenu = new PurchaseMenus();
+        }
         private void GetPlayerName()
         {
             Console.WriteLine($"Player {number} please enter your name");
@@ -260,23 +268,64 @@ namespace OrangeadeStand
         }
         private void SaveGame()
         {
+            if (CheckForOverwrite())
+            {
+                string username = GetUserInput("UserName");
+                string password = GetUserInput("password");
+                SavePlayerInventory(username, password);
+                return;
+            }
+            else
+            {
+                CreateNewUser();
+            }
+        
+        }
+        private bool CheckForOverwrite()
+        {
+            string playerInput;
+            Console.WriteLine($"Player {number} would you like to overwrite a previously saved player?");
+            playerInput = Console.ReadLine().ToLower();
+            if (playerInput == "yes" || playerInput == "y")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void CreateNewUser()
+        {
+            Console.WriteLine("Enter New Username and password");
             string username = GetUserInput("UserName");
             string password = GetUserInput("password");
-            SavePlayerInventory(username, password);
+            EnterNewUser(username, password);
             return;
-        
+        }
+        private void EnterNewUser(string username, string password)
+        {
+            sqlconn.Open();
+            SqlCommand cmd = new SqlCommand($"INSERT INTO SaveDATA VALUES('{username}', '{password}', '{name}', '{inventory.Money}', '{inventory.oranges.Count()}', '{inventory.sugars.Count()}', '{inventory.iceCubes.Count()}', '{inventory.cups.Count()}', '{currentOrangeade.Cost}', '{currentOrangeade.Oranges}', '{currentOrangeade.Sugar}', '{currentOrangeade.Ice}', '{currentOrangeade.Pulp}');", sqlconn);
+            cmd.ExecuteNonQuery();
+            sqlconn.Close();
         }
         private void SavePlayerInventory(string username, string password)
         {
             using (sqlconn)
                 try
                 {
-                    SaveUserItem(inventory.iceCubes.Count(), "Ice", username, password);
-                    SaveUserItem(inventory.oranges.Count(), "Oranges", username, password);
-                    SaveUserItem(inventory.cups.Count(), "Cups", username, password);
-                    SaveUserItem(inventory.sugars.Count(), "Sugar", username, password);
-                    SaveUserItem(name, "Name", username, password);
-                    SaveUserItem(inventory.Money, "Money", username, password);
+                    SaveUserItem(inventory.iceCubes.Count(), "PlayerIce", username, password);
+                    SaveUserItem(inventory.oranges.Count(), "PlayerOranges", username, password);
+                    SaveUserItem(inventory.cups.Count(), "PlayerCups", username, password);
+                    SaveUserItem(inventory.sugars.Count(), "PlayerSugar", username, password);
+                    SaveUserItem(name, "PlayerName", username, password);
+                    SaveUserItem(inventory.Money, "PlayerMoney", username, password);
+                    SaveUserItem(currentOrangeade.Ice, "RecipieIce", username, password);
+                    SaveUserItem(currentOrangeade.Oranges, "RecipieOranges", username, password);
+                    SaveUserItem(currentOrangeade.Cost, "RecipieCost", username, password);
+                    SaveUserItem(currentOrangeade.Sugar, "RecipieSugar", username, password);
+                    SaveUserItem(currentOrangeade.Pulp, "RecipiePulp", username, password);
                 }
                 catch (Exception ex)
                 {
@@ -303,14 +352,14 @@ namespace OrangeadeStand
         private void SaveUserItem(int itemCount, string columnName, string username, string password)
         {
             sqlconn.Open();
-            SqlCommand cmd = new SqlCommand($"UPDATE SaveDATA SET Player{columnName} = {itemCount} WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
+            SqlCommand cmd = new SqlCommand($"UPDATE SaveDATA SET {columnName} = {itemCount} WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
             cmd.ExecuteNonQuery();
             sqlconn.Close();
         }
         private void SaveUserItem(string name, string columnName, string username, string password)
         {
             sqlconn.Open();
-            SqlCommand cmd = new SqlCommand($"UPDATE SaveDATA SET Player{columnName} = '{name}' WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
+            SqlCommand cmd = new SqlCommand($"UPDATE SaveDATA SET {columnName} = '{name}' WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
             cmd.ExecuteNonQuery();
             sqlconn.Close();
         }

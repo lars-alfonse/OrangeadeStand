@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTester.cs" />
+    <Compile Include="Eraser.cs" />
     <Compile Include="InventoryItems.cs" />
     <Compile Include="Cup.cs" />
     <Compile Include="Customer.cs" />

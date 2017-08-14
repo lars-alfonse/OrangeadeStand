@@ -11,8 +11,7 @@ namespace OrangeadeStand
     {
         static string connectionString = "SERVER = DESKTOP-2C737RL; DATABASE = OrangeadeStand; Trusted_Connection = true";
         static SqlConnection sqlconn = new SqlConnection(connectionString);
-        Player playerOne;
-        Player playerTwo;
+        Player player;
         Day today;
         List<Player> players = new List<Player>();
         List<TurnMenu> playerMenus = new List<TurnMenu>();
@@ -78,7 +77,7 @@ namespace OrangeadeStand
                 case "start game":
                     StartNewGame();
                     break;
-                case "load game":
+                case "load player":
                     LoadGame();
                     break;
                 case "quit":
@@ -97,20 +96,87 @@ namespace OrangeadeStand
         }
         private void CheckPlayerNumber()
         {
-            switch (startGameMenu.NumberOfPlayers)
+           for (int i = 0; i < startGameMenu.NumberOfPlayers; i++)
             {
-                case 1:
-                    playerOne = new Player("one");
-                    players.Add(playerOne);
-                    break;
-                case 2:
-                    playerTwo = new Player("two");
-                    playerOne = new Player("one");
-                    players.Add(playerOne);
-                    players.Add(playerTwo);
-                    break;
-                default:
-                    break;
+                    player = new Player($"{i+1}");
+                    players.Add(player);
+            }
+        }
+        private void CheckPlayerNumber(bool isLoaded)
+        {
+            for (int i = 0; i < startGameMenu.NumberOfPlayers; i++)
+            {
+                if (CheckIfLoaded(i + 1))
+                {
+                    player = LoadPlayer(i + 1);
+                    players.Add(player);
+                }
+                else
+                {
+                    player = new Player($"{i}");
+                    players.Add(player);
+                }
+            }
+        }
+        private Player LoadPlayer(int playerNumber)
+        {
+            Eraser.ClearConsole();
+            Console.WriteLine("Please Enter Username (cAsE sEnSiTiVe)");
+            string username = Console.ReadLine();
+            Console.WriteLine("Please enter password (cAsE sEnSiTiVe)");
+            string password = Console.ReadLine();
+            using (sqlconn)
+                try
+                {
+                    sqlconn.Open();
+                    SqlCommand cmd = new SqlCommand($"SELECT * FROM SaveDATA WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string name = reader.GetString(3);
+                        int money = reader.GetInt32(4);
+                        int oranges = reader.GetInt32(5);
+                        int sugar = reader.GetInt32(6);
+                        int ice = reader.GetInt32(7);
+                        int cups = reader.GetInt32(8);
+                        int cost = reader.GetInt32(9);
+                        int recipieOranges = reader.GetInt32(10);
+                        int recipieSugar = reader.GetInt32(11);
+                        int recipieIce = reader.GetInt32(12);
+                        string pulp = reader.GetString(13);
+                        player = new Player(playerNumber.ToString(), name, money, oranges, sugar, ice, cups, cost, recipieOranges, recipieSugar, recipieIce, pulp);
+                    }
+                    sqlconn.Close();
+                    Eraser.ClearConsole();
+                    Console.WriteLine("Player Loaded press enter to continue");
+                    Console.ReadLine();
+                    Eraser.ClearConsole();
+                    return player;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Eraser.ClearConsole();
+                    Console.WriteLine("Player not Found. New player will be created press enter to continue");
+                    sqlconn.Close();
+                    Console.ReadLine();
+                    Eraser.ClearConsole();
+                    player = new Player(playerNumber.ToString());
+                    return player;
+                }
+        }
+        private bool CheckIfLoaded(int number)
+        {
+            string playerInput;
+            Console.WriteLine($"Player {number} would you like to load a player?");
+            playerInput = Console.ReadLine().ToLower();
+            if (playerInput == "yes" || playerInput == "y")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         private void PlayGame()
@@ -131,44 +197,15 @@ namespace OrangeadeStand
                     LogDayResults(player);
                 }
                 Console.ReadLine();
+                Eraser.ClearConsole();
             }
         }
         private void LoadGame()
         {
-            Console.WriteLine("Please Enter Username (cAsE sEnSiTiVe)");
-            string username = Console.ReadLine();
-            Console.WriteLine("Please enter password (cAsE sEnSiTiVe)");
-            string password = Console.ReadLine();
-                using (sqlconn)
-                    try
-                    {
-                        sqlconn.Open();
-                        SqlCommand cmd = new SqlCommand($"SELECT * FROM SaveDATA WHERE UserName = '{username}' AND Pass = '{password}'", sqlconn);
-                        SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        string name = reader.GetInt32(0).ToString();
-                        string pass = reader.GetString(1);
-
-                        Console.WriteLine(pass + name);
-                    }
-                        sqlconn.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        Console.WriteLine("Failed Connection. Save Data will not be accessable during this game");
-                        sqlconn.Close();
-                        Console.ReadLine();
-                        LoadGame();
-                    }
-                    finally
-                    {
-                        Console.WriteLine("Press Enter to Start");
-                        sqlconn.Close();
-                        Console.ReadLine();
-                    }
-
-            }
+            startGameMenu.runMenu();
+            CheckPlayerNumber(true);
+            PlayGame();
+            
+        }
         }
 }
