@@ -92,6 +92,50 @@ namespace OrangeadeStandUnitTest
 
         }
         [TestMethod]
+        public void StartMenu_TranslatesNumber3InputToStartGame()
+        {
+            StartGameMenu startMenu = new StartGameMenu();
+            PrivateObject menu = new PrivateObject(startMenu);
+            string expectedResult = "start game";
+            startMenu.PlayerInput = "3";
+
+            menu.Invoke("TranslateUserInput");
+
+            Assert.AreEqual(startMenu.PlayerInput, expectedResult);
+
+        }
+        [TestMethod]
+        public void StartMenu_ChangeDaysFunctionChangesDayNumbers()
+        {
+            StartGameMenu startMenu = new StartGameMenu();
+            PrivateObject menu = new PrivateObject(startMenu);
+            int expectedResult = 14;
+            string input = "14";
+            StringReader stringReader = new StringReader(input);
+            Console.SetIn(stringReader);
+
+            menu.Invoke("ChangeDays");
+            int actualResult = startMenu.NumberOfDays;
+
+            Assert.AreEqual(actualResult, expectedResult);
+
+        }
+        public void StartMenu_ChangeDaysFunctionChangesPlayerNumber()
+        {
+            StartGameMenu startMenu = new StartGameMenu();
+            PrivateObject menu = new PrivateObject(startMenu);
+            int expectedResult = 10;
+            string input = "10";
+            StringReader stringReader = new StringReader(input);
+            Console.SetIn(stringReader);
+
+            menu.Invoke("ChangePlayers");
+            int actualResult = startMenu.NumberOfDays;
+
+            Assert.AreEqual(actualResult, expectedResult);
+
+        }
+        [TestMethod]
         public void Game_CheckIfPlayersAdd()
         {
             Game game = new Game();
