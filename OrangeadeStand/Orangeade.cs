@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Orangeade
+    public class Orangeade
     {
         private int cost;
         private int oranges;

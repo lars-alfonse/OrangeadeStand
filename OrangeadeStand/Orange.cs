@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Orange : InventoryItems
+    public class Orange : InventoryItems
     {
         public Orange()
         {

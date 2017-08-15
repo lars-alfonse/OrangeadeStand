@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace OrangeadeStand
 {
-    class Player
+    public class Player
     {
         static string connectionString = "SERVER = DESKTOP-2C737RL; DATABASE = OrangeadeStand; Trusted_Connection = true";
         static SqlConnection sqlconn = new SqlConnection(connectionString);

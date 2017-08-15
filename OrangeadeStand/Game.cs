@@ -7,18 +7,18 @@ using System.Data.SqlClient;
 
 namespace OrangeadeStand
 {
-     class Game
+    public class Game
     {
         static string connectionString = "SERVER = DESKTOP-2C737RL; DATABASE = OrangeadeStand; Trusted_Connection = true";
         static SqlConnection sqlconn = new SqlConnection(connectionString);
-        Player player;
+        public Player player;
         Day today;
-        List<Player> players = new List<Player>();
+        public List<Player> players = new List<Player>();
         List<TurnMenu> playerMenus = new List<TurnMenu>();
         Customer currentCustomer;
         Weather prediction;
         MainMenu mainMenu = new MainMenu();
-        StartGameMenu startGameMenu = new StartGameMenu();
+        public StartGameMenu startGameMenu = new StartGameMenu();
         private int dayCounter;
         private int winningProfit;
         private int profit;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class InventoryItems
+    public class InventoryItems
     {
         protected string name;
         protected int cost;

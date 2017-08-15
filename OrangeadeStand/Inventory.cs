@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Inventory
+    public class Inventory
     {
         private int money;
         private bool soldOut;

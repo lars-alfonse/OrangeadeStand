@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Cup : InventoryItems
+    public class Cup : InventoryItems
     {
         public Cup()
         {

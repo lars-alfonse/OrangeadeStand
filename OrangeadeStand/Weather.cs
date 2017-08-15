@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Weather
+    public class Weather
     {
         public bool isNice;
         public int cloudCoverage;

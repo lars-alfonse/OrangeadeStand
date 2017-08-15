@@ -17,12 +17,20 @@ namespace OrangeadeStand
             {
                 return numberOfPlayers;
             }
+            set
+            {
+                numberOfPlayers = value;
+            }
         }
         public int NumberOfDays
         {
             get
             {
                 return numberOfDays;
+            }
+            set
+            {
+                numberOfDays = value;
             }
         }
         public StartGameMenu()

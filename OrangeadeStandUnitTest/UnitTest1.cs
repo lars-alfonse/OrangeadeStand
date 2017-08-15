@@ -75,5 +75,38 @@ namespace OrangeadeStandUnitTest
             Assert.AreEqual(mainMenu.PlayerInput, expectedResult);
 
         }
+        [TestMethod]
+        public void StartMenu_GetsPlayerInputAndConvertToLowerCase()
+        {
+            StartGameMenu startMenu = new StartGameMenu();
+            PrivateObject menu = new PrivateObject(startMenu);
+            string expectedResult = "start game";
+            string input = "Start Game";
+            StringReader stringReader = new StringReader(input);
+            Console.SetIn(stringReader);
+
+            menu.Invoke("GetUserInput");
+            string actualResult = startMenu.PlayerInput;
+
+            Assert.AreEqual(actualResult, expectedResult);
+
+        }
+        [TestMethod]
+        public void Game_CheckIfPlayersAdd()
+        {
+            Game game = new Game();
+            game.startGameMenu.NumberOfPlayers = 3;
+            int expectedResult = 3;
+            PrivateObject obj = new PrivateObject(game);
+            string names = "testName";
+            StringReader stringReader = new StringReader(names);
+            Console.SetIn(stringReader);
+
+            obj.Invoke("CheckPlayerNumber");
+            int actualResult = game.players.Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
     }
 }

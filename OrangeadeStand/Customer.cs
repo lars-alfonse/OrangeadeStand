@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Customer
+    public class Customer
     {
         private int maxPrice;
         private int thirstLevel;

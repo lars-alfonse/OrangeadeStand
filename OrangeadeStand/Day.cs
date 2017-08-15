@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class Day
+    public class Day
     {
         Random random = new Random();
         private int dayNumber;
