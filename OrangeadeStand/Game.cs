@@ -11,7 +11,7 @@ namespace OrangeadeStand
     {
         static string connectionString = "SERVER = DESKTOP-2C737RL; DATABASE = OrangeadeStand; Trusted_Connection = true";
         static SqlConnection sqlconn = new SqlConnection(connectionString);
-        public Player player;
+        Player player;
         Day today;
         public List<Player> players = new List<Player>();
         List<TurnMenu> playerMenus = new List<TurnMenu>();
@@ -120,13 +120,19 @@ namespace OrangeadeStand
                 }
             }
         }
+        private string GetLoadInfo(string parameter)
+        {
+            Console.WriteLine($"Please Enter {parameter} (cAsE sEnSiTiVe)");
+            return Console.ReadLine();
+        }
         private Player LoadPlayer(int playerNumber)
         {
             Eraser.ClearConsole();
-            Console.WriteLine("Please Enter Username (cAsE sEnSiTiVe)");
-            string username = Console.ReadLine();
-            Console.WriteLine("Please enter password (cAsE sEnSiTiVe)");
-            string password = Console.ReadLine();
+
+            string username = GetLoadInfo("Username");
+
+            string password = GetLoadInfo("Password");
+
             using (sqlconn)
                 try
                 {
@@ -135,37 +141,57 @@ namespace OrangeadeStand
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        string name = reader.GetString(3);
-                        int money = reader.GetInt32(4);
-                        int oranges = reader.GetInt32(5);
-                        int sugar = reader.GetInt32(6);
-                        int ice = reader.GetInt32(7);
-                        int cups = reader.GetInt32(8);
-                        int cost = reader.GetInt32(9);
-                        int recipieOranges = reader.GetInt32(10);
-                        int recipieSugar = reader.GetInt32(11);
-                        int recipieIce = reader.GetInt32(12);
-                        string pulp = reader.GetString(13);
-                        player = new Player(playerNumber.ToString(), name, money, oranges, sugar, ice, cups, cost, recipieOranges, recipieSugar, recipieIce, pulp);
+                        player = GenerateLoadedPlayer(reader, playerNumber);
                     }
                     sqlconn.Close();
-                    Eraser.ClearConsole();
-                    Console.WriteLine("Player Loaded press enter to continue");
-                    Console.ReadLine();
-                    Eraser.ClearConsole();
+                    if (player == null)
+                    {
+                        ReportLoadFailure();
+                        player = new Player(playerNumber.ToString());
+                        return player;
+                    }
+                    ReportLoadSuccess();
                     return player;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Eraser.ClearConsole();
-                    Console.WriteLine("Player not Found. New player will be created press enter to continue");
                     sqlconn.Close();
-                    Console.ReadLine();
-                    Eraser.ClearConsole();
+                    ReportLoadFailure();
                     player = new Player(playerNumber.ToString());
                     return player;
                 }
+            
+        }
+        private void ReportLoadFailure()
+        {
+            Console.WriteLine("Player not Found. New player will be created press enter to continue");
+            Console.ReadLine();
+            Eraser.ClearConsole();
+        }
+        private void ReportLoadSuccess()
+        {
+            Eraser.ClearConsole();
+            Console.WriteLine("Player Loaded press enter to continue");
+            Console.ReadLine();
+            Eraser.ClearConsole();
+        }
+        private Player GenerateLoadedPlayer(SqlDataReader reader, int playerNumber)
+        {
+            Player loadedPlayer;
+            string name = reader.GetString(3);
+            int money = reader.GetInt32(4);
+            int oranges = reader.GetInt32(5);
+            int sugar = reader.GetInt32(6);
+            int ice = reader.GetInt32(7);
+            int cups = reader.GetInt32(8);
+            int cost = reader.GetInt32(9);
+            int recipieOranges = reader.GetInt32(10);
+            int recipieSugar = reader.GetInt32(11);
+            int recipieIce = reader.GetInt32(12);
+            string pulp = reader.GetString(13);
+            loadedPlayer = new Player(playerNumber.ToString(), name, money, oranges, sugar, ice, cups, cost, recipieOranges, recipieSugar, recipieIce, pulp);
+            return loadedPlayer;
         }
         private bool CheckIfLoaded(int number)
         {
