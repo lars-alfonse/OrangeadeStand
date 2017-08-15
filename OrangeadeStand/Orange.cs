@@ -11,7 +11,7 @@ namespace OrangeadeStand
         public Orange()
         {
             name = "orange";
-            cost = 10;
+            cost = 7;
             shelfLife = 4;
             unit = 1;
         }
