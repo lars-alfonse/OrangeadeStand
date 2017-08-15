@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class MainMenu : UserInterface
+    public class MainMenu : UserInterface
     {
         public MainMenu()
         {

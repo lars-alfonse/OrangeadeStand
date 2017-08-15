@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    abstract class UserInterface
+    public abstract class UserInterface
     {
         private string playerInput;
         protected List<string> userOptions;

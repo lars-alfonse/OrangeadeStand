@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class TurnMenu : UserInterface
+    public class TurnMenu : UserInterface
     {
         private string playerName;
         public TurnMenu(string name)

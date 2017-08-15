@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class StartGameMenu : UserInterface
+    public class StartGameMenu : UserInterface
     {
         private int numberOfPlayers;
         private int numberOfDays;

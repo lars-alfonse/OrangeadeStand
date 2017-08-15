@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrangeadeStand
 {
-    class PurchaseMenus : UserInterface 
+    public class PurchaseMenus : UserInterface 
     {
         Orange orange = new Orange();
         Sugar sugar = new Sugar();

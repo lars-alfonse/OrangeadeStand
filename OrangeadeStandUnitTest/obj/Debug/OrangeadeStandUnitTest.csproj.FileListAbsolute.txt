@@ -1,0 +1,9 @@
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\bin\Debug\OrangeadeStandUnitTest.dll
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\bin\Debug\OrangeadeStandUnitTest.pdb
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\bin\Debug\OrangeadeStand.exe
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\bin\Debug\OrangeadeStand.pdb
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\obj\Debug\OrangeadeStandUnitTest.csprojResolveAssemblyReference.cache
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\obj\Debug\OrangeadeStandUnitTest.dll
+D:\Documents\DevCodeCamp\OrangeadeStand\OrangeadeStandUnitTest\obj\Debug\OrangeadeStandUnitTest.pdb
