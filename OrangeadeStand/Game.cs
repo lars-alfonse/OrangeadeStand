@@ -20,6 +20,8 @@ namespace OrangeadeStand
         MainMenu mainMenu = new MainMenu();
         StartGameMenu startGameMenu = new StartGameMenu();
         private int dayCounter;
+        private int winningProfit;
+        private int profit;
 
         public void RunGame()
         {
@@ -198,6 +200,36 @@ namespace OrangeadeStand
                 }
                 Console.ReadLine();
                 Eraser.ClearConsole();
+            }
+            EndGame();
+        }
+        private void EndGame()
+        {
+            CheckProfits();
+            ReportWinner();
+        }
+        private void CheckProfits()
+        {
+            winningProfit = 0;
+            foreach (Player player in players)
+            {
+                profit = player.ReportTotalProfit();
+                if (profit > winningProfit)
+                {
+                    winningProfit = profit;
+                    player.IsWinner = true;
+                }
+            }
+        }
+        private void ReportWinner()
+        {
+            foreach (Player player in players)
+            {
+                Console.WriteLine($"{player.Name} made {player.ReportTotalProfit()}");
+                if (player.IsWinner)
+                {
+                    Console.WriteLine($"{player.Name} WINS!!!");
+                }
             }
         }
         private void LoadGame()

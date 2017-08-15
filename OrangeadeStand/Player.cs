@@ -13,6 +13,7 @@ namespace OrangeadeStand
         static SqlConnection sqlconn = new SqlConnection(connectionString);
         private string number;
         private string name;
+        private bool isWinner;
         private int totalProfit;
         private int totalSales;
         private Cup cup = new Cup();
@@ -31,6 +32,17 @@ namespace OrangeadeStand
             {
                 return name;
 
+            }
+        }
+        public bool IsWinner
+        {
+            get
+            {
+                return isWinner;
+            }
+            set
+            {
+                isWinner = value;
             }
         }
         public int TotalProfit
@@ -222,6 +234,10 @@ namespace OrangeadeStand
                 return;
             }
 
+        }
+        public int ReportTotalProfit()
+        {
+            return totalProfit;
         }
         private int GetTransactionChoice(InventoryItems item)
         {
