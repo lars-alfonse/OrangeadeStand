@@ -169,6 +169,19 @@ namespace OrangeadeStand
             }
             DisplayDay(playerInputNumber);
         }
+        private int GetDaySelection()
+        {
+            Console.WriteLine($"{Days.Count} Day(s) passed which day would you like check (enter day number or type quit)");
+            try
+            {
+                return int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Input invalid please enter integer number");
+                return GetDaySelection();
+            }
+        }
         private void DisplayDay(int inputNumber)
         {
             if (inputNumber >= 0)
@@ -181,12 +194,16 @@ namespace OrangeadeStand
         }
         private void RunPurchaseMenu()
         {
-            purchaseMenu.PlayerInput = "not exit";
+            ResetPurchaseMenu();
             while (purchaseMenu.PlayerInput != "exit")
             {
                 purchaseMenu.RunMenu();
                 RunShopOutput();
             }
+        }
+        private void ResetPurchaseMenu()
+        {
+            purchaseMenu.PlayerInput = "not exit";
         }
         private void CheckInventory()
         {
@@ -286,8 +303,8 @@ namespace OrangeadeStand
         {
             if (CheckForOverwrite())
             {
-                string username = GetUserInput("UserName");
-                string password = GetUserInput("password");
+                string username = GetSaveInput("UserName");
+                string password = GetSaveInput("password");
                 SavePlayerInventory(username, password);
                 return;
             }
@@ -314,8 +331,8 @@ namespace OrangeadeStand
         private void CreateNewUser()
         {
             Console.WriteLine("Enter New Username and password");
-            string username = GetUserInput("UserName");
-            string password = GetUserInput("password");
+            string username = GetSaveInput("UserName");
+            string password = GetSaveInput("password");
             EnterNewUser(username, password);
             return;
         }
@@ -359,7 +376,7 @@ namespace OrangeadeStand
                     Console.ReadLine();
                 }
         }
-        private string GetUserInput(string parameter)
+        private string GetSaveInput(string parameter)
         {
             Console.WriteLine($"Please Enter {parameter} (cAsE sEnSiTiVe)");
             string returnParameter = Console.ReadLine();
