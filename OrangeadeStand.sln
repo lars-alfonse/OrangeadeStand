@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeadeStand", "Orangeade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeadeStandUnitTest", "OrangeadeStandUnitTest\OrangeadeStandUnitTest.csproj", "{387F04FA-C967-453C-A880-2BA2A9B452C5}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "OrangeadeStandModel", "OrangeadeStandModel\OrangeadeStandModel.modelproj", "{28C83607-7B66-44A4-8820-5C2280AC1DBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{387F04FA-C967-453C-A880-2BA2A9B452C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{387F04FA-C967-453C-A880-2BA2A9B452C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{387F04FA-C967-453C-A880-2BA2A9B452C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28C83607-7B66-44A4-8820-5C2280AC1DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28C83607-7B66-44A4-8820-5C2280AC1DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28C83607-7B66-44A4-8820-5C2280AC1DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28C83607-7B66-44A4-8820-5C2280AC1DBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

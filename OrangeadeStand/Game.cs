@@ -22,6 +22,18 @@ namespace OrangeadeStand
         private int dayCounter;
         private int winningProfit;
         private int profit;
+        
+        public int WinningProfit
+        {
+            get
+            {
+                return winningProfit;
+            }
+            set
+            {
+                winningProfit = value;
+            }
+        }
 
         public void RunGame()
         {
@@ -216,6 +228,7 @@ namespace OrangeadeStand
                 {
                     player.prediction = this.prediction;
                     player.RunTurnMenu();
+                    Eraser.ClearConsole();
                 }
                 StartNextDay();
                 foreach (Player player in players)
@@ -234,17 +247,29 @@ namespace OrangeadeStand
             CheckProfits();
             ReportWinner();
         }
-        private void CheckProfits()
+        private void ResetWinner()
         {
             winningProfit = 0;
+        }
+        private void CheckProfits()
+        {
+            ResetWinner();
             foreach (Player player in players)
             {
                 profit = player.ReportTotalProfit();
                 if (profit > winningProfit)
                 {
                     winningProfit = profit;
-                    player.IsWinner = true;
                 }
+            }
+            RecordWinner();
+        }
+        private void RecordWinner()
+        {
+            foreach (Player player in players)
+            {
+                if (winningProfit == player.TotalProfit)
+                    player.IsWinner = true;
             }
         }
         private void ReportWinner()

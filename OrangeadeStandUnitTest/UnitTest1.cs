@@ -152,5 +152,95 @@ namespace OrangeadeStandUnitTest
             Assert.AreEqual(expectedResult, actualResult);
 
         }
+        public void Game_WinningProfitCheckMakesisWinnerTrue()
+        {
+            Game game = new Game();
+            Player playerOne = new Player("1");
+            Player playerTwo = new Player("2");
+            Player playerThree = new Player("3");
+            playerOne.TotalProfit = 100;
+            playerTwo.TotalProfit = 500;
+            playerThree.TotalProfit = 300;
+            bool expectedValue = true;
+            game.WinningProfit = 500;
+            PrivateObject obj = new PrivateObject(game);
+            game.players.Add(playerOne);
+            game.players.Add(playerTwo);
+            game.players.Add(playerThree);
+
+            obj.Invoke("RecordWinner");
+            bool actualValue = playerTwo.IsWinner;
+
+            Assert.AreEqual(actualValue, expectedValue);
+
+        }
+        public void Game_WinningProfitCheckMakesisWinnerFalse()
+        {
+            Game game = new Game();
+            Player playerOne = new Player("1");
+            Player playerTwo = new Player("2");
+            Player playerThree = new Player("3");
+            playerOne.TotalProfit = 100;
+            playerTwo.TotalProfit = 500;
+            playerThree.TotalProfit = 300;
+            bool expectedValue = false;
+            game.WinningProfit = 500;
+            PrivateObject obj = new PrivateObject(game);
+            game.players.Add(playerOne);
+            game.players.Add(playerTwo);
+            game.players.Add(playerThree);
+
+            obj.Invoke("RecordWinner");
+            bool actualValue = playerOne.IsWinner;
+
+            Assert.AreEqual(actualValue, expectedValue);
+
+        }
+        [TestMethod]
+        public void Game_WinnerReportedisTrue()
+        {
+            Game game = new Game();
+            Player playerOne = new Player("1");
+            Player playerTwo = new Player("2");
+            Player playerThree = new Player("3");
+            playerOne.TotalProfit = 100;
+            playerTwo.TotalProfit = 500;
+            playerThree.TotalProfit = 300;
+            bool expectedValue = true;
+            PrivateObject obj = new PrivateObject(game);
+            game.players.Add(playerOne);
+            game.players.Add(playerTwo);
+            game.players.Add(playerThree);
+
+            obj.Invoke("CheckProfits");
+            bool actualValue = playerTwo.IsWinner;
+
+            Assert.AreEqual(actualValue, expectedValue);
+
+        }
+
+        [TestMethod]
+        public void Game_LoserReportedisFalse()
+        {
+            Game game = new Game();
+            Player playerOne = new Player("1");
+            Player playerTwo = new Player("2");
+            Player playerThree = new Player("3");
+            playerOne.TotalProfit = 100;
+            playerTwo.TotalProfit = 500;
+            playerThree.TotalProfit = 300;
+            bool expectedValue = false;
+            PrivateObject obj = new PrivateObject(game);
+            game.players.Add(playerOne);
+            game.players.Add(playerTwo);
+            game.players.Add(playerThree);
+
+            obj.Invoke("CheckProfits");
+            bool actualValue = playerOne.IsWinner;
+
+            Assert.AreEqual(actualValue, expectedValue);
+
+        }
+
     }
 }
